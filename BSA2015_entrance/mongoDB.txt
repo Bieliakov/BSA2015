@@ -1,0 +1,29 @@
+1) Написать запрос для поиска всех студентов, у которых score > 93% и меньше 95% по любому из типов выполненных заданий.
+
+db.collName.find({scores: {$elemMatch: {$and: [{score : {$gt: 93}}, {score: {$lt: 95}}]}}}).pretty();
+
+2) Написать запрос для поиска всех студентов, у которых score > 93% и меньше 95% по любому из типов выполненных заданий.
+
+db.collName.aggregate([
+
+    {
+        $unwind: "$scores"
+    },
+
+    {
+        $match: {
+            "scores.type": "exam",
+            "scores.score": {$gt: 90}
+        }
+    }
+
+]).pretty();
+
+3) Студенту с именем Vinnie Auerbach добавить поле “accepted” со значением true.
+
+db.collName.update({name: "Vinnie Auerbach", "scores.score": {$gt: 90}}, {$set: {accepted: true}});
+
+Комментарий:
+
+Вместо "yourDbName" назвал базу данных "dbName", вместо "yourCollectionName" - "collName". Если изменять названия БД и коллекции было не обязательно, то в запросах использовать "yourCollectionName" вместо  "collName".
+По поводу последнего (третьего) задания: в коллекции присутствуют два студента с именем "Vinnie Auerbach". Я выбрал использовать критерий "scores.score": {$gt: 90} для выбора необходимого "Vinnie Auerbach" среди двух, хотя можно было сделать это и по-другому в данной ситуации.
