@@ -17,6 +17,7 @@
     Модифицировать функцию так, что она не принимает объект, а оперирует с объектом this. Функция объявляется вне контекста, но вызывается на определенном объекте при помощи call/apply/bind.
 
 */
+
 // inheritance using constructor functions
 
 function Man(name, age){
@@ -98,18 +99,22 @@ stud.study();
 
 // simple duckType function
 
+/*
+
 function duckType(obj){
     var clazz = obj.constructor.toString(); // variable for class identification
-    if (obj.study) {
+    if ('study' in obj && typeof obj.study === 'function') {
         return clazz.slice(9 , clazz.indexOf('('));
-    } else if (obj.live){
+    } else if ('live' in obj && typeof obj.live === 'function'){
         return clazz.slice(9 , clazz.indexOf('('));
     }
 };
 
+*/
+
 // test suite for simple duckType function
 
-/*    
+/*   
 
 console.log(duckType(man));
 console.log(duckType(stud));
@@ -122,9 +127,9 @@ console.log(duckType(stud));
 
 function duckType(){
     var clazz = this.constructor.toString(); // variable for class identification
-    if (this.study) {
+    if ('study' in this && typeof this.study === 'function') {
         return clazz.slice(9 , clazz.indexOf('('));
-    } else if (this.live){
+    } else if ('live' in this && typeof this.live === 'function'){
         return clazz.slice(9 , clazz.indexOf('('));
     }
 };
