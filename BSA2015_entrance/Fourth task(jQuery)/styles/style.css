@@ -1,0 +1,38 @@
+* {
+    margin:auto;
+    padding:auto;
+}
+div#container{
+    max-width: 40%;
+    display:inline-block;
+    margin-top: 30px;
+}
+
+img{
+    vertical-align: bottom;
+}
+
+ul li input {
+    margin-left: 10px;
+}
+
+#main_input {
+    margin-left: 34px;
+}
+
+#last_row{
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+#delete_button{
+    margin-left: 100px;
+}
+.right_delete{
+    vertical-align:center;
+}
+
+#container ul li {
+    margin-top: 10px;
+}
+
