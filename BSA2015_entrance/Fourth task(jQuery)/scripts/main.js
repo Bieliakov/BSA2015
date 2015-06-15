@@ -10,18 +10,12 @@
         _document = document;
         _$container = $('#container');
         
-        
         _$container.append(
             '<ul>' + 
                 '<li id="first_row">' +
-                    '<input type="text" id="main_input" autofocus title="Введите наименование товара">' +
+                    '<input type="text" id="main_input" autofocus maxlength="50" title="Введите наименование товара">' +
                 '</li>' +
             '</ul>');
-        
-        //$(function() {
-        //    $('[autofocus]:not(:focus)').eq(0).focus();
-        //}); 
-        // function for compatibility autofocus attribute in ie9-
                     
         $('li#first_row').on('click', function(){
             $('input#main_input').focus();
@@ -29,8 +23,7 @@
         
         $('input#main_input').on('keydown', function(event){ 
             if (event.keyCode == 13) {
-        
-                //Application.addProduct($(this));
+
                 var main_value = $(this).val();
                 
                 id = Application.nextId();         
@@ -43,7 +36,7 @@
                         '<div class="left_check">'+ 
                             '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/>' + 
                         '</div>' +
-                        '<input type="text" id="input_id' + id + '" class="edit" title="Двойной щелчек для редактирования"/>' +
+                        '<input type="text" id="input_id' + id + '" class="edit" title="Двойной щелчек для редактирования" maxlength="50"/>' +
                         '<div class="right_delete">' +
                             '<img src="images/delete.png" title="Нажмите, чтобы удалить товар" style="display:none;" class="right_image">' +
                         '</div>' +
@@ -58,26 +51,15 @@
                 if (_$container.find('ul li').length === 2 && !_$container.find('div#last_row').is(':visible')) {
                     Application.addEditRow(_$container);
                 }
-                
-                
-                
-            }; // end if hit enter in the main_input        
-                
-            
-            Application.everything(_$container);
-                
-                
-        }); // end keypress
-        
-        
-        
-    };
+ 
+            }; // end if hit enter in the input#main_input        
 
-    Application.addProduct = function($baseNode) {
-        
+            Application.addEventListeners(_$container);
+
+        }); // end keypress
     };
     
-    Application.everything = function($baseNode) {
+    Application.addEventListeners = function($baseNode) {
      
         $baseNode.children('div').filter('div#last_row').children('button#delete_button')
             .on('click', function(evt){
@@ -94,7 +76,7 @@
                 }
                 
                 
-                setTimeout(function(){Application.checkRemoveLastRow($baseNode.find('ul li').length)},600); // убрать костыль
+                setTimeout(function(){Application.checkRemoveLastRow($baseNode.find('ul li').length)},600);
                 
                 struckout = [];
                 
@@ -130,7 +112,7 @@
                 e.stopImmediatePropagation();
 
                 $(this).find('div img.right_image')
-                    .fadeIn('fast')
+                    .fadeTo('fast', 0.5)
                     .on('click', function(event){
                         
                         event.stopImmediatePropagation();
@@ -173,9 +155,9 @@
                 $(this).attr('src', 'images/add_all_checked.png').hide().fadeIn();
                 setTimeout(function(){$('img#left_image_all').attr('src', 'images/add_empty.png')},600)
                 
-                $('li.row').each(function(index){
+                $('li.row').each(function(){
 
-                    Application.toStrukout($(this).children('div.left_check').children('img.left_image'))
+                    Application.appendToStrukout($(this).children('div.left_check').children('img.left_image'))
 
                 }); // end each        
 
@@ -183,7 +165,7 @@
         
 
         
-    }; // end Application.addProduct
+    }; // end Application.addEventListeners
     
     Application.checkStrukout = function($check_image){
                 
@@ -191,7 +173,7 @@
         
         if ($current_input.css('text-decoration') === 'none'){
             
-            Application.toStrukout($check_image);
+            Application.appendToStrukout($check_image);
                     
         } else {
             $check_image.attr('src', 'images/add_empty.png');
@@ -220,16 +202,17 @@
         }; // loop for comparing each element in struckout array with target_row
     }; // end removeFromStrukout function
     
-    Application.toStrukout = function($strukout_image){
+    Application.appendToStrukout = function($strukout_image){
       
             $strukout_image.attr('src', 'images/add_checked.png')
                     .parent('div')
-                    .next('input')
+                    .next('input') // input field in current row
                     .css('text-decoration', 'line-through')
-                    .css('opacity', '0.3')  // сделать так, чтобы только текст становился полупрозрачным
+                    .css('opacity', '0.3');
                     
-            struckout.push($strukout_image.parent().parent())  
-    }; // end toStrukout function
+            struckout.push($strukout_image.parent().parent()); // current li with class="row"
+            
+    }; // end appendToStrukout function
 
     Application.addEditRow = function($baseNode){
         
