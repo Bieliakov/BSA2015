@@ -2,9 +2,10 @@
     margin:auto;
     padding:auto;
 }
+
 div#container{
     max-width: 40%;
-    display:inline-block;
+    display: inline-block;
     margin-top: 30px;
 }
 
@@ -12,12 +13,31 @@ img{
     vertical-align: bottom;
 }
 
-ul li input {
+#container ul li input {
     margin-left: 10px;
+    /*width:80%;*/
+    border: none;
 }
 
-#main_input {
+#container ul li {
+    list-style-type: none;
+
+}
+
+#container ul li.row{
+    border: 0 solid silver;
+    border-width: 0 0 1px 0;
+    padding:10px 0;
+}
+#container ul li#first_row{
+    border: 0 solid silver;
+    border-width: 1px 0 1px 0;
+    padding:10px 0;
+}
+
+#container ul li #main_input {
     margin-left: 34px;
+
 }
 
 #last_row{
@@ -26,20 +46,19 @@ ul li input {
 }
 
 #delete_button{
-    margin-left: 100px;
-}
-.right_delete{
-    vertical-align:center;
+    margin-left: 50px;
+    
 }
 
-#container ul li {
-    list-style-type: none;
-    margin-top: 10px;
+ul li div.right_delete{
+    vertical-align:center;
+    float: right;
 }
 
 #container button,#container img {
     cursor: pointer;
 }
 
-
-
+#container ul li > *{
+    display: inline-block;
+}

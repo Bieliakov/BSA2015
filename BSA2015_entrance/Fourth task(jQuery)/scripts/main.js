@@ -11,15 +11,23 @@
         _$container = $('#container');
         
         
-        _$container.append('<ul><li><input type="text" id="main_input" autofocus></li></ul>');
+        _$container.append(
+            '<ul>' + 
+                '<li id="first_row">' +
+                    '<input type="text" id="main_input" autofocus title="Введите наименование товара">' +
+                '</li>' +
+            '</ul>');
         
         //$(function() {
         //    $('[autofocus]:not(:focus)').eq(0).focus();
         //}); 
-        // function for compatability autofocus attribute in ie9-
+        // function for compatibility autofocus attribute in ie9-
                     
+        $('li#first_row').on('click', function(){
+            $('input#main_input').focus();
+        });
         
-        $('input#main_input').on('keypress', function(event){ 
+        $('input#main_input').on('keydown', function(event){ 
             if (event.keyCode == 13) {
         
                 //Application.addProduct($(this));
@@ -30,28 +38,34 @@
                 
                 if (!main_value) { return; }; // if input#main_input is empty - don't add a row
                 
-                _$container.children('ul').append('<li class="row" id="row'+ id + '"><div class="left_check"><img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/></div><input type="text" class="edit" title="Двойной щелчек для редактирования"><div class="right_delete"><img src="images/delete.png" title="Нажмите, чтобы удалить товар" style="display:none;" class="right_image"></div></li>')
-                            .children('li')
-                            .children('input')
-                            .eq(_$container.children('ul').children('li').children('input').length - 1) // input's field with current id
-                            .val(main_value)
-                            .attr('readonly', true);
-                
-                
-               
-                _$container.children().children('li').children().css('display', 'inline');
-                
+                _$container.children('ul').append(
+                    '<li class="row" id="row'+ id + '">' + 
+                        '<div class="left_check">'+ 
+                            '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/>' + 
+                        '</div>' +
+                        '<input type="text" id="input_id' + id + '" class="edit" title="Двойной щелчек для редактирования"/>' +
+                        '<div class="right_delete">' +
+                            '<img src="images/delete.png" title="Нажмите, чтобы удалить товар" style="display:none;" class="right_image">' +
+                        '</div>' +
+                    '</li>');
+                            
+                $('input#input_id' + id).val(main_value).attr('readonly', true);
+
                 $(this).val('');
-
-                if (_$container.children('ul').children('li').length === 2 && !_$container.children('div#last_row').is(':visible')) {
-                  
+                
+                $(this).focus();
+                
+                if (_$container.find('ul li').length === 2 && !_$container.find('div#last_row').is(':visible')) {
                     Application.addEditRow(_$container);
-
                 }
-
+                
+                
+                
             }; // end if hit enter in the main_input        
+                
             
-                Application.everything(_$container);
+            Application.everything(_$container);
+                
                 
         }); // end keypress
         
@@ -80,88 +94,77 @@
                 }
                 
                 
-                setTimeout(function(){Application.checkRemoveLastRow($baseNode.children('ul').children('li').length)},600); // убрать костыль
+                setTimeout(function(){Application.checkRemoveLastRow($baseNode.find('ul li').length)},600); // убрать костыль
                 
                 struckout = [];
                 
         }); // click on the button#delete_button
         
-        $baseNode.children('ul').children('li').children('input').on('dblclick', function(evt){
-                //evt.stopImmediatePropagation();
-
+        $baseNode.find('ul li.row input').on('dblclick', function(evt){
+            
+                evt.stopImmediatePropagation();
+                
                 $(this).attr('readonly', false);
                 
                 var current_value = $(this).val();
+
                 if ($(this).css('text-decoration') === 'line-through') {
                     $(this).attr('readonly', true);
                 }
-                
-                /* может использовать что-то типа этого, чтобы при двойном щелчке при редактировании поля, не было автовыбора строки
-                        .edit {
-                   -ms-user-select: none;
-                   -moz-user-select: none;
-                   -khtml-user-select: none;
-                   -webkit-user-select: none;
-                   user-select: none;
-                }*/
-                
-                $(this).on('keypress', function(event){
+       
+                $(this).on('keydown', function(event){
 
                     if (event.keyCode == 13) {
-                        
                         $(this).attr('readonly', true);
                     } else if (event.keyCode == 27) {
                         $(this).attr('readonly', true);
                         $(this).val(current_value);
-                        
                     } ;
+                    
                 }); // end keypress in dblclick func
                 
             }); // end dblclick func
 
-        $baseNode.children('ul').children('li').hover(
+        $baseNode.find('ul li.row').hover(
             function(e){
-                
-                $(this).children('div').children('img').last().fadeIn('fast')
-                    .on('click', function(event){ //м.б. сделать $(this).children('div').children('div')
+                e.stopImmediatePropagation();
+
+                $(this).find('div img.right_image')
+                    .fadeIn('fast')
+                    .on('click', function(event){
+                        
                         event.stopImmediatePropagation();
                         
+                        var target_row = $(event.target).parent().parent(); // current li with class="row"
                         
-                        $(event.target).parent().parent().fadeOut();
+                        target_row.fadeOut(); 
                         
                         setTimeout(function(){
                             
-                            $(event.target).parent().parent().remove();
+                            target_row.remove();
+                            Application.removeFromStrukout($(event.target));                            
+                            Application.checkRemoveLastRow($baseNode.find('ul li').length);
                             
-                            for (var i = 0; i < struckout.length; i++){
-                                if (struckout[i] === $(event.target).parent().parent()) {
-                                    struckout.splice(i,1);
-                                }
-                            }; // улучшить эту функцию
-                            
-                            
-                            Application.checkRemoveLastRow($baseNode.children('ul').children('li').length);
-                            } , 300); // убрать костыль
+                        } , 300); // end setTimeout function 
                     
-                    }); // end click event on 'right_image' (м.б. сделать при наведении на див)
+                    }); // end click event on 'img.right_image'
                 
-            }, function(){
+            }, function(evt){
                 
-                $(this).children('div').children('img').last().fadeOut('fast');      
+                evt.stopImmediatePropagation();
+                $(this).find('img.right_image').fadeOut('fast'); 
                                             
-        }); // end hover function on a row 
+        }); // end hover function on a li with class="row" 
         
-        $('.left_image').on('click', function(event){
+        $('img.left_image').on('click', function(event){
             
             event.stopImmediatePropagation();
-            
             Application.checkStrukout($(event.target));
             
         }); // end click on 'img.left_image'
         
 
-        $baseNode.children('div').filter('div#last_row').children('div#left_check_all').children('img#left_image_all')
-                    .on('click', function(evt){
+        $('img#left_image_all').on('click', function(evt){
                 
                 evt.stopImmediatePropagation();
 
@@ -184,27 +187,38 @@
     
     Application.checkStrukout = function($check_image){
                 
-        if ($check_image.parent('div').next('input').css('text-decoration') === 'none'){
+        var $current_input = $check_image.parent('div').next('input'); // input field of current row
+        
+        if ($current_input.css('text-decoration') === 'none'){
             
             Application.toStrukout($check_image);
                     
         } else {
-            $check_image.attr('src', 'images/add_empty.png')
-                    .parent('div')
-                    .next('input')
+            $check_image.attr('src', 'images/add_empty.png');
+            
+            $current_input
                     .css('text-decoration', 'none')
                     .css('opacity', '1.0');
-                    
-            for (var i = 0; i < struckout.length; i++){
 
-                if (struckout[i].is($check_image.parent().parent())) {
-                    struckout.splice(i,1);
-                    break;
-                };
-               
-            }; // улучшить эту функцию
+            Application.removeFromStrukout($check_image);
         };
     }; // end 'checkStrukout' function
+    
+    Application.removeFromStrukout = function($strukout_image){
+        
+        var $target_row = $($strukout_image).parent().parent();
+
+        var struckout_length = struckout.length;
+        
+        for (var i = 0; i < struckout_length; i++){
+
+            if (struckout[i].is($target_row)) {
+                struckout.splice(i,1);
+                break;
+            };
+           
+        }; // loop for comparing each element in struckout array with target_row
+    }; // end removeFromStrukout function
     
     Application.toStrukout = function($strukout_image){
       
@@ -215,10 +229,8 @@
                     .css('opacity', '0.3')  // сделать так, чтобы только текст становился полупрозрачным
                     
             struckout.push($strukout_image.parent().parent())  
+    }; // end toStrukout function
 
-    };
-    
-    
     Application.addEditRow = function($baseNode){
         
         if ($('div#last_row').length > 0) {
@@ -226,23 +238,24 @@
             
         } else {
             $baseNode.append('<div id="last_row" style="display:none;"></div>');
-            $baseNode.children('div').filter('#last_row').append('<div id="left_check_all"><img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" id="left_image_all"/></div><button id="delete_button">Удалить вычеркнутые</button>')
-                    .children()
-                    .css('display', 'inline')
-                    .filter('#delete_button');
-            
+            $baseNode.find('div#last_row').append(
+                '<div id="left_check_all">' +
+                    '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" id="left_image_all"/>' +
+                '</div>' +
+                '<button id="delete_button">' +
+                    'Удалить вычеркнутые' +
+                '</button>')
+                    .children() // div id="left_check_all" and button id="delete_button"
+                    .css('display', 'inline-block');
+                    
             $('div#last_row').fadeIn();
-
         };
-
     }; // end addEditRow 
     
     Application.checkRemoveLastRow = function(len_ul){
         if ( len_ul === 1) {
             $('div#last_row').fadeOut();
-            
         }
-                       
     }; //end checkRemoveLastRow 
 
     Application.nextId = function(){
