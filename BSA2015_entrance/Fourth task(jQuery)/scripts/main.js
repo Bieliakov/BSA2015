@@ -11,12 +11,18 @@
         _$container = $('#container');
         
         
-        _$container.append('<ul><li><input type="text" id="main_input"></li></ul>')
-                    .children('ul')
-                    .children('li')
-                    .css('list-style-type', 'none');
-                    
+        _$container.append('<ul><li><input type="text" id="main_input" autofocus></li></ul>');
+        
+    /*    $(function() {
+          $('[autofocus]:not(:focus)').eq(0).focus();
+        }); 
+        // function for compatability autofocus attribute in ie9-
+    */                
+        
+        
         this.addProduct(_$container);
+        
+
         
     };
 
@@ -32,7 +38,7 @@
                          
                 if (!main_value) { return; }; // сюда добавить всплывающую подсказку
                 
-                $baseNode.children('ul').append('<li class="row" id="row'+ id + '"><div class="left_check"><img src="images/add_empty.png" class="left_image" id="left_image_id' + id + '"/></div><input type="text" class="edit"><div class="right_delete"><img src="images/delete.png" style="display:none;" class="right_image"></div></li>')
+                $baseNode.children('ul').append('<li class="row" id="row'+ id + '"><div class="left_check"><img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/></div><input type="text" class="edit"><div class="right_delete"><img src="images/delete.png" title="Нажмите, чтобы удалить товар" style="display:none;" class="right_image"></div></li>')
                             .css('list-style-type', 'none')
                             .children('li')
                             .children('input')
@@ -166,7 +172,7 @@
             
         }); // end keypress
         
-    }; // end hitting enter on the #main_input
+    }; // end Application.addProduct
     
     Application.checkStrukout = function($check_image){
                 
@@ -212,11 +218,10 @@
             
         } else {
         $baseNode.append('<div id="last_row" style="display:none;"></div>');
-        $baseNode.children('div').filter('#last_row').append('<div id="left_check_all"><img src="images/add_empty.png" id="left_image_all"/></div><button id="delete_button">Удалить вычеркнутые</button>')
+        $baseNode.children('div').filter('#last_row').append('<div id="left_check_all"><img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" id="left_image_all"/></div><button id="delete_button">Удалить вычеркнутые</button>')
                 .children()
                 .css('display', 'inline')
-                .filter('#delete_button')
-                .css('font-size', '12px');
+                .filter('#delete_button');
         
         $('div#last_row').fadeIn();
 
