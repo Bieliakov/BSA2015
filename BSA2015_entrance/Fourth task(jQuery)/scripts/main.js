@@ -34,7 +34,7 @@
                 _$container.children('ul').append(
                     '<li class="row" id="row'+ id + '">' + 
                         '<div class="left_check">'+ 
-                            '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/>' + 
+                            '<img src="images/add_empty.png" title="Вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/>' + 
                         '</div>' +
                         '<input type="text" id="input_id' + id + '" class="edit" title="Двойной щелчек для редактирования" maxlength="50"/>' +
                         '<div class="right_delete">' +
