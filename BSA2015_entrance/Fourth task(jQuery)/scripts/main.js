@@ -25,12 +25,12 @@
             if (event.keyCode == 13) {
 
                 var main_value = $(this).val();
-                
+
                 id = Application.nextId();         
                 Application.nextId();
-                
+
                 if (!main_value) { return; }; // if input#main_input is empty - don't add a row
-                
+
                 _$container.children('ul').append(
                     '<li class="row" id="row'+ id + '">' + 
                         '<div class="left_check">'+ 
@@ -115,9 +115,7 @@
                     .fadeTo('fast', 0.5)
                     .on('click', function(event){
                         
-                        
                         event.stopImmediatePropagation();
-                        
                         
                         var target_row = $(event.target).parent().parent(); // current li with class="row"
                         
@@ -153,7 +151,6 @@
         $('img#left_image_all').on('click', function(evt){
                 
                 evt.stopImmediatePropagation();
-
                 struckout = [];
                 
                 $(this).attr('src', 'images/add_all_checked.png').hide().fadeIn();
