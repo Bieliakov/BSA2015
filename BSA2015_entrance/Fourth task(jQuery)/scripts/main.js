@@ -71,11 +71,11 @@
                         (function(row){ // closure for removing rows with delay
                             return function(){
                                 row.remove();
+                                Application.checkDeleteButton();
                         }
                     })(struckout[i]) , 600);
                 }
-                
-                
+ 
                 setTimeout(function(){Application.checkRemoveLastRow($baseNode.find('ul li').length)},600);
                 
                 struckout = [];
@@ -115,7 +115,9 @@
                     .fadeTo('fast', 0.5)
                     .on('click', function(event){
                         
+                        
                         event.stopImmediatePropagation();
+                        
                         
                         var target_row = $(event.target).parent().parent(); // current li with class="row"
                         
@@ -126,9 +128,10 @@
                             target_row.remove();
                             Application.removeFromStrukout($(event.target));                            
                             Application.checkRemoveLastRow($baseNode.find('ul li').length);
-                            
+                            Application.checkDeleteButton();
+                                                        
                         } , 300); // end setTimeout function 
-                    
+                        
                     }); // end click event on 'img.right_image'
                 
             }, function(evt){
@@ -142,6 +145,7 @@
             
             event.stopImmediatePropagation();
             Application.checkStrukout($(event.target));
+            Application.checkDeleteButton();
             
         }); // end click on 'img.left_image'
         
@@ -158,8 +162,10 @@
                 $('li.row').each(function(){
 
                     Application.appendToStrukout($(this).children('div.left_check').children('img.left_image'))
+                    
+                }); // end each  
 
-                }); // end each        
+                Application.checkDeleteButton();
 
         });     // end onclick on img#left_image_all
         
@@ -232,6 +238,8 @@
                     .css('display', 'inline-block');
                     
             $('div#last_row').fadeIn();
+            $('button#delete_button').hide();
+            
         };
     }; // end addEditRow 
     
@@ -239,7 +247,15 @@
         if ( len_ul === 1) {
             $('div#last_row').fadeOut();
         }
-    }; //end checkRemoveLastRow 
+    };
+    
+    Application.checkDeleteButton = function(){
+        if (struckout.length) {
+            $('button#delete_button').fadeIn();
+        } else {
+            $('button#delete_button').fadeOut('fast');
+        };
+    };
 
     Application.nextId = function(){
         return id++;  
