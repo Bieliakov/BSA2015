@@ -236,7 +236,8 @@
             $baseNode.append('<div id="last_row" style="display:none;"></div>');
             $baseNode.find('div#last_row').append(
                 '<div id="left_check_all">' +
-                    '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" id="left_image_all"/>' +
+                    '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" '+
+                        'id="left_image_all"/>' +
                 '</div>' +
                 '<button id="delete_button">' +
                     'Удалить вычеркнутые' +
