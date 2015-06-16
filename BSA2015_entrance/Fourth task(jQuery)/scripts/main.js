@@ -13,7 +13,8 @@
         _$container.append(
             '<ul>' + 
                 '<li id="first_row">' +
-                    '<input type="text" id="main_input" autofocus maxlength="50" title="Введите наименование товара">' +
+                    '<input type="text" id="main_input" autofocus maxlength="50"' +
+                            'title="Введите наименование товара">' +
                 '</li>' +
             '</ul>');
                     
@@ -34,11 +35,14 @@
                 _$container.children('ul').append(
                     '<li class="row" id="row'+ id + '">' + 
                         '<div class="left_check">'+ 
-                            '<img src="images/add_empty.png" title="Вычеркнуть товар" class="left_image" id="left_image_id' + id + '"/>' + 
+                            '<img src="images/add_empty.png" title="Вычеркнуть товар"' +
+                                'class="left_image" id="left_image_id' + id + '"/>' + 
                         '</div>' +
-                        '<input type="text" id="input_id' + id + '" class="edit" title="Двойной щелчек для редактирования" maxlength="50"/>' +
+                        '<input type="text" class="edit" id="input_id' + id + '"' +
+                            'title="Двойной щелчек для редактирования" maxlength="50"/>' +
                         '<div class="right_delete">' +
-                            '<img src="images/delete.png" title="Нажмите, чтобы удалить товар" style="display:none;" class="right_image">' +
+                            '<img src="images/delete.png" title="Нажмите, чтобы удалить товар"' +
+                                'style="display:none;" class="right_image">' +
                         '</div>' +
                     '</li>');
                             
@@ -48,7 +52,9 @@
                 
                 $(this).focus();
                 
-                if (_$container.find('ul li').length === 2 && !_$container.find('div#last_row').is(':visible')) {
+                if (_$container.find('ul li').length === 2 &&
+                    !_$container.find('div#last_row').is(':visible')) {
+                        
                     Application.addEditRow(_$container);
                 }
  
@@ -158,7 +164,7 @@
                 
                 $('li.row').each(function(){
 
-                    Application.appendToStrukout($(this).children('div.left_check').children('img.left_image'))
+                    Application.appendToStrukout($(this).find('img.left_image'))
                     
                 }); // end each  
 
