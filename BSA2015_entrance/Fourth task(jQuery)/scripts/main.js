@@ -161,7 +161,7 @@
                 evt.stopImmediatePropagation();
                 struckout = [];
                 
-                $(this).attr('src', 'images/add_all_checked.png').hide().fadeIn();
+                $(this).attr('src', 'images/add_all_checked.png').hide().fadeTo('fast', 0.5);
                 setTimeout(function(){
                     $('img#left_image_all').attr('src', 'images/add_empty.png');
                 } ,600);
@@ -237,7 +237,7 @@
             $baseNode.find('div#last_row').append(
                 '<div id="left_check_all">' +
                     '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" '+
-                        'id="left_image_all"/>' +
+                        'id="left_image_all" style="opacity: 0.5;"/>' +
                 '</div>' +
                 '<button id="delete_button">' +
                     'Удалить вычеркнутые' +
