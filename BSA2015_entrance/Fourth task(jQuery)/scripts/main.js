@@ -22,10 +22,10 @@
             $('input#main_input').focus();
         });
         
-        $('input#main_input').on('keydown', function(event){ 
+        $('input#main_input').on('keydown', function(e){ 
 
-            if (event.keyCode == 13) {
-
+            if (e.keyCode == 13) {
+ 
                 var main_value = $(this).val();
 
                 id = Application.nextId();         
@@ -56,20 +56,20 @@
                 if (_$container.find('ul li').length === 2 &&
                     !_$container.find('div#last_row').is(':visible')) {
                         
-                    Application.addEditRow(_$container);
-                }
- 
-            }; // end if hit enter in the input#main_input        
+                    Application.addLastEditRow(_$container);
+                    
+                } // add last row if it isn't displayed
+
+            }; // end hit enter in the input#main_input        
 
             Application.addEventListeners(_$container);
 
-        }); // end keypress
-    };
+        }); // end keydown event on input#main_input
+    }; // end Application.init
     
     Application.addEventListeners = function($baseNode) {
      
-        $baseNode.children('div').filter('div#last_row').children('button#delete_button')
-            .on('click', function(evt){
+        $baseNode.find('button#delete_button').on('click', function(evt){
                 
                 evt.stopImmediatePropagation();
                 for (var i = 0; i < struckout.length; i++){
@@ -85,7 +85,7 @@
  
                 setTimeout(function(){
                     Application.checkRemoveLastRow($baseNode.find('ul li').length);
-                }, 600);
+                }, 600); // remove last row if there are no rows except the main row
                 
                 struckout = [];
                 
@@ -227,7 +227,7 @@
             
     }; // end appendToStrukout function
 
-    Application.addEditRow = function($baseNode){
+    Application.addLastEditRow = function($baseNode){
         
         if ($('div#last_row').length > 0) {
             $('div#last_row').fadeIn();
@@ -239,7 +239,7 @@
                     '<img src="images/add_empty.png" title="Нажмите, чтобы вычеркнуть все товары" '+
                         'id="left_image_all" style="opacity: 0.5;"/>' +
                 '</div>' +
-                '<button id="delete_button">' +
+                '<button type="button" id="delete_button">' +
                     'Удалить вычеркнутые' +
                 '</button>')
                     .children() // div id="left_check_all" and button id="delete_button"
@@ -249,7 +249,7 @@
             $('button#delete_button').hide();
             
         };
-    }; // end addEditRow 
+    }; // end addLastEditRow 
     
     Application.checkRemoveLastRow = function(len_ul){
         if ( len_ul === 1) {
