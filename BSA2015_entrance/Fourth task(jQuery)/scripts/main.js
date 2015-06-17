@@ -154,7 +154,6 @@
             Application.checkDeleteButton();
             
         }); // end click on 'img.left_image'
-        
 
         $('img#left_image_all').on('click', function(evt){
                 
