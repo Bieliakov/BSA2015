@@ -5,11 +5,11 @@
         _$container,
         id = 0;
         struckout = []; // an array for aggregation struckout products
-        
+
     Application.init = function(document) {
         _document = document;
         _$container = $('#container');
-        
+
         _$container.append(
             '<ul>' + 
                 '<li id="first_row">' +
@@ -17,15 +17,15 @@
                             'title="Введите наименование товара">' +
                 '</li>' +
             '</ul>');
-                    
+
         $('li#first_row').on('click', function(){
             $('input#main_input').focus();
         });
-        
+
         $('input#main_input').on('keydown', function(e){ 
 
             if (e.keyCode == 13) {
- 
+
                 var main_value = $(this).val();
 
                 id = Application.nextId();         
@@ -46,7 +46,7 @@
                                 'style="display:none;" class="right_image">' +
                         '</div>' +
                     '</li>');
-                            
+
                 $('input#input_id' + id).val(main_value).attr('readonly', true);
 
                 $(this).val('');
@@ -57,7 +57,7 @@
                     !_$container.find('div#last_row').is(':visible')) {
                         
                     Application.addLastEditRow(_$container);
-                    
+
                 } // add last row if it isn't displayed
 
             }; // end hit enter in the input#main_input        
@@ -68,9 +68,9 @@
     }; // end Application.init
     
     Application.addEventListeners = function($baseNode) {
-     
+
         $baseNode.find('button#delete_button').on('click', function(evt){
-                
+
                 evt.stopImmediatePropagation();
                 for (var i = 0; i < struckout.length; i++){
                     struckout[i].fadeOut();
@@ -82,28 +82,30 @@
                         }
                     })(struckout[i]) , 600);
                 }
- 
+
                 setTimeout(function(){
                     Application.checkRemoveLastRow($baseNode.find('ul li').length);
                 }, 600); // remove last row if there are no rows except the main row
-                
-                struckout = [];
-                
-        }); // click on the button#delete_button
-        
-        $baseNode.find('ul li.row input').on('dblclick', function(evt){
-                
-                evt.stopImmediatePropagation();
-                $(this).trigger('focus'); // preferable for IE
-                $(this).removeAttr('readonly');
-                
-                var current_value = $(this).val();
 
-                if ($(this).css('text-decoration') === 'line-through') {
-                    $(this).attr('readonly', true);
+                struckout = [];
+
+        }); // click on the button#delete_button
+
+        $baseNode.find('ul li.row').on('dblclick', function(evt){
+
+                evt.stopImmediatePropagation();
+
+                var $current_input_field = $(this).find('input');
+                var current_value = $current_input_field.val();
+
+                $current_input_field.trigger('focus'); // preferable for IE
+                $current_input_field.removeAttr('readonly');
+
+                if ($current_input_field.css('text-decoration') === 'line-through') {
+                    $current_input_field.attr('readonly', true);
                 };
 
-                $(this).on('keydown', function(event){
+                $current_input_field.on('keydown', function(event){
                     event.stopPropagation();
                     if (event.keyCode == 13) {
                         $(this).attr('readonly', true);
@@ -115,7 +117,7 @@
                     };
 
                 }); // end keypress in dblclick func
-                
+
             }); // end dblclick func
 
         $baseNode.find('ul li.row').hover(
@@ -125,72 +127,72 @@
                 $(this).find('div img.right_image')
                     .fadeTo('fast', 0.5)
                     .on('click', function(event){
-                        
+
                         event.stopImmediatePropagation();
-                        
+
                         var target_row = $(event.target).parent().parent(); // current li.row
-                        
+
                         target_row.fadeOut(); 
-                        
+
                         setTimeout(function(){
-                            
+
                             target_row.remove();
-                            Application.removeFromStrukout($(event.target));                            
+                            Application.removeFromStrukout($(event.target));
                             Application.checkRemoveLastRow($baseNode.find('ul li').length);
                             Application.checkDeleteButton();
-                                                        
+
                         } , 300); // end setTimeout function 
-                        
+
                     }); // end click event on 'img.right_image'
-                
+
             }, function(evt){
-                
+
                 evt.stopImmediatePropagation();
                 $(this).find('img.right_image').fadeOut('fast'); 
-                                            
+
         }); // end hover function on a li with class="row" 
-        
+
         $('img.left_image').on('click', function(event){
-            
+
             event.stopImmediatePropagation();
             Application.checkStrukout($(event.target));
             Application.checkDeleteButton();
-            
+
         }); // end click on 'img.left_image'
 
         $('img#left_image_all').on('click', function(evt){
-                
+
                 evt.stopImmediatePropagation();
                 struckout = [];
-                
+
                 $(this).attr('src', 'images/add_all_checked.png').hide().fadeTo('fast', 0.5);
                 setTimeout(function(){
                     $('img#left_image_all').attr('src', 'images/add_empty.png');
                 } ,600);
-                
+
                 $('li.row').each(function(){
 
                     Application.appendToStrukout($(this).find('img.left_image'))
-                    
+
                 }); // end each  
 
                 Application.checkDeleteButton();
 
         });     // end onclick on img#left_image_all
-        
+
     }; // end Application.addEventListeners
-    
+
     Application.checkStrukout = function($check_image){
-                
+
         var $current_input = $check_image.parent('div').next('input'); // input field of current row
-        
+
         if ($current_input.css('text-decoration') === 'none'){
-            
+
             Application.appendToStrukout($check_image);
-                    
+
         } else {
             $check_image.attr('src', 'images/add_empty.png');
-            
+
             $current_input
                     .css('text-decoration', 'none')
                     .css('opacity', '1.0');
@@ -200,38 +202,37 @@
     }; // end 'checkStrukout' function
     
     Application.removeFromStrukout = function($strukout_image){
-        
-        var $target_row = $($strukout_image).parent().parent();
 
+        var $target_row = $($strukout_image).parent().parent();
         var struckout_length = struckout.length;
-        
+
         for (var i = 0; i < struckout_length; i++){
 
             if (struckout[i].is($target_row)) {
                 struckout.splice(i,1);
                 break;
             };
-           
+
         }; // loop for comparing each element in struckout array with target_row
     }; // end removeFromStrukout function
-    
+
     Application.appendToStrukout = function($strukout_image){
-      
+
             $strukout_image.attr('src', 'images/add_checked.png')
                     .parent('div')
                     .next('input') // input field in current row
                     .css('text-decoration', 'line-through')
                     .css('opacity', '0.3');
-                    
+
             struckout.push($strukout_image.parent().parent()); // current li with class="row"
-            
+
     }; // end appendToStrukout function
 
     Application.addLastEditRow = function($baseNode){
-        
+
         if ($('div#last_row').length > 0) {
             $('div#last_row').fadeIn();
-            
+
         } else {
             $baseNode.append('<div id="last_row" style="display:none;"></div>');
             $baseNode.find('div#last_row').append(
@@ -250,13 +251,13 @@
             
         };
     }; // end addLastEditRow 
-    
+
     Application.checkRemoveLastRow = function(len_ul){
         if ( len_ul === 1) {
             $('div#last_row').fadeOut();
         }
     };
-    
+
     Application.checkDeleteButton = function(){
         if (struckout.length) {
             $('button#delete_button').fadeIn();
