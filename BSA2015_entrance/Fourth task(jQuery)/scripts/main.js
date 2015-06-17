@@ -178,8 +178,6 @@
 
         });     // end onclick on img#left_image_all
         
-
-        
     }; // end Application.addEventListeners
     
     Application.checkStrukout = function($check_image){
