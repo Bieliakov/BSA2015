@@ -23,6 +23,7 @@
         });
         
         $('input#main_input').on('keydown', function(event){ 
+
             if (event.keyCode == 13) {
 
                 var main_value = $(this).val();
@@ -91,26 +92,28 @@
         }); // click on the button#delete_button
         
         $baseNode.find('ul li.row input').on('dblclick', function(evt){
-            
-                evt.stopImmediatePropagation();
                 
-                $(this).attr('readonly', false);
+                evt.stopImmediatePropagation();
+                $(this).trigger('focus'); // preferable for IE
+                $(this).removeAttr('readonly');
                 
                 var current_value = $(this).val();
 
                 if ($(this).css('text-decoration') === 'line-through') {
                     $(this).attr('readonly', true);
-                }
-       
-                $(this).on('keydown', function(event){
+                };
 
+                $(this).on('keydown', function(event){
+                    event.stopPropagation();
                     if (event.keyCode == 13) {
                         $(this).attr('readonly', true);
+                        $(this).trigger("blur"); // trick for ie
                     } else if (event.keyCode == 27) {
                         $(this).attr('readonly', true);
                         $(this).val(current_value);
-                    } ;
-                    
+                        $(this).trigger("blur"); // trick for ie
+                    };
+
                 }); // end keypress in dblclick func
                 
             }); // end dblclick func
