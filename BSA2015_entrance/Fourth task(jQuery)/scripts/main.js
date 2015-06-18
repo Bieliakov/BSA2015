@@ -122,7 +122,6 @@
                     return;
                 } else {
                     $current_input_field.on('focus', function(){
-                        console.log(this)
                         this.selectionStart = this.selectionEnd = this.value.length;
                     }); // function for placing cursor at end of text in text input element
                     $current_input_field.trigger('focus');
