@@ -101,12 +101,6 @@
 
                 $current_input_field.removeAttr('readonly');
 
-                $current_input_field.on('focus', function(){
-                    this.selectionStart = this.selectionEnd = this.value.length;
-                }); // function for placing cursor at end of text in text input element
-
-                $current_input_field.trigger('focus');
-
                 if ($current_input_field.css('text-decoration') === 'line-through') {
                     $current_input_field.attr('readonly', true);
                 };
@@ -122,7 +116,17 @@
                         $(this).trigger("blur"); // trick for ie
                     };
 
-                }); // end keypress in dblclick func
+                }); // end keydown in dblclick func
+
+                if ( $('input:focus').length > 0 ) {
+                    return;
+                } else {
+                    $current_input_field.on('focus', function(){
+                        console.log(this)
+                        this.selectionStart = this.selectionEnd = this.value.length;
+                    }); // function for placing cursor at end of text in text input element
+                    $current_input_field.trigger('focus');
+                } // end else clause
 
             }); // end dblclick func
 
