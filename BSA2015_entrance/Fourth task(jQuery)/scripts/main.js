@@ -100,8 +100,12 @@
                 var current_value = $current_input_field.val();
 
                 $current_input_field.removeAttr('readonly');
-                $current_input_field.trigger('focus'); // preferable for IE
 
+                $current_input_field.on('focus', function(){
+                    this.selectionStart = this.selectionEnd = this.value.length;
+                }); // function for placing cursor at end of text in text input element
+
+                $current_input_field.trigger('focus');
 
                 if ($current_input_field.css('text-decoration') === 'line-through') {
                     $current_input_field.attr('readonly', true);
