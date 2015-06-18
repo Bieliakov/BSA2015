@@ -39,8 +39,9 @@
                             '<img src="images/add_empty.png" title="Вычеркнуть товар"' +
                                 'class="left_image" id="left_image_id' + id + '"/>' + 
                         '</div>' +
-                        '<input type="text" class="edit" id="input_id' + id + '"' +
-                            'title="Двойной щелчек для редактирования" maxlength="50"/>' +
+                        '<input type="text" class="edit" id="input_id' + id + '" ' +
+                            'title="Двойной щелчек для редактирования" maxlength="50" ' +
+                            'onfocus="this.value = this.value;"/>' +
                         '<div class="right_delete">' +
                             '<img src="images/delete.png" title="Нажмите, чтобы удалить товар"' +
                                 'style="display:none;" class="right_image">' +
@@ -98,8 +99,9 @@
                 var $current_input_field = $(this).find('input');
                 var current_value = $current_input_field.val();
 
-                $current_input_field.trigger('focus'); // preferable for IE
                 $current_input_field.removeAttr('readonly');
+                $current_input_field.trigger('focus'); // preferable for IE
+
 
                 if ($current_input_field.css('text-decoration') === 'line-through') {
                     $current_input_field.attr('readonly', true);
@@ -121,7 +123,7 @@
             }); // end dblclick func
 
         $baseNode.find('ul li.row').hover(
-            function(e){
+            function(e){ // mouseover
                 e.stopImmediatePropagation();
 
                 $(this).find('div img.right_image')
@@ -145,7 +147,7 @@
 
                     }); // end click event on 'img.right_image'
 
-            }, function(evt){
+            }, function(evt){ // mouseout
 
                 evt.stopImmediatePropagation();
                 $(this).find('img.right_image').fadeOut('fast'); 
