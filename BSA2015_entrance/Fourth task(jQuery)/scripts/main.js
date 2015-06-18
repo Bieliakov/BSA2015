@@ -34,13 +34,13 @@
                 if (!main_value) { return; }; // if input#main_input is empty - don't add a row
 
                 _$container.children('ul').append(
-                    '<li class="row" id="row'+ id + '">' + 
+                    '<li class="row" id="row' + id + '" title="Двойной щелчек для редактирования" ' + 
+                        'maxlength="50">' + 
                         '<div class="left_check">'+ 
                             '<img src="images/add_empty.png" title="Вычеркнуть товар"' +
                                 'class="left_image" id="left_image_id' + id + '"/>' + 
                         '</div>' +
                         '<input type="text" class="edit" id="input_id' + id + '" ' +
-                            'title="Двойной щелчек для редактирования" maxlength="50" ' +
                             'onfocus="this.value = this.value;"/>' +
                         '<div class="right_delete">' +
                             '<img src="images/delete.png" title="Нажмите, чтобы удалить товар"' +
