@@ -113,7 +113,7 @@
                     } else if (event.keyCode == 27) {
                         $(this).attr('readonly', true);
                         $(this).val(current_value);
-                        $(this).trigger("blur"); // trick for ie
+                        $(this).trigger("blur");
                     };
 
                 }); // end keydown in dblclick func
