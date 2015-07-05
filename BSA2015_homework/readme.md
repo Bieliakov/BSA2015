@@ -1,1 +1,1 @@
-Directory with block of homeworks before working on a project.
+Directory with block of homework.
