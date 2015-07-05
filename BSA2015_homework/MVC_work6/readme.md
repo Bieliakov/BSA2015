@@ -1,1 +1,1 @@
-Задание в файле task.md
+The requirements for the task is in the task.md file.
