@@ -7,15 +7,9 @@ function Model(obj){
     return this;
 }
 
-// works without it
-/* 
-Model.prototype.takeExam = function (){
-    this.examsTaken++;
-    this.changed = true;
-}
-*/
-// test case
+// testing code
 
+/*
 var Student = new Model({
     name: 'Piotr',
     age: 22,
@@ -26,9 +20,4 @@ var Student = new Model({
         this.changed = true;
     }
 });
-/*
-for (var prop in Student){
-    console.log(prop, ':', Student[prop])
-}
-console.log(Student)
 */
