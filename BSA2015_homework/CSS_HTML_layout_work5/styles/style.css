@@ -2,7 +2,7 @@
 body {
     margin: 0 auto;
     height: 100%;
-    opacity: 0.6;/*delete this*/
+    opacity: 0.6;/* for passing to choose faint background-colors */
 }
 
 li {
@@ -11,24 +11,21 @@ li {
 
 a:link, a:visited{
     text-decoration: none;
-
 }
 
 body header {
     width: 100%;
-    height: 100%;
     display: table;
 }
 
 body header div.img {
     min-width:15%;
-    height: 100%;
+    line-height: 0; /* fore removing the gap between the image and parent div */
     display: table-cell;
 }
 
 body header div.img img {
     width:100%;
-    height: 100%;
 }
 
 body header div.outer {
@@ -39,17 +36,11 @@ body header div.outer {
 }
 
 body header div.outer div.inner {
-    /*position: absolute;
-    top: 50%;*/
-  /*display: inline-block;
-  vertical-align: middle;*/
-  /*line-height: 10;*/
-  margin-left: 1em;
+    margin-left: 1em;
 }
 
 main {
     height: 500px;
-
 }
 
 main aside {
@@ -63,34 +54,31 @@ main aside nav ul  {
     text-align: left;
     margin: 0;
     padding: 0;
-
 }
 
 main aside nav ul li {
-    
     margin: 0;
-    padding: 10px 20px;
-    line-height: 20px;
     background: green;
-
 }
 
 main aside nav ul li a{
     color: white;
+    width: 100%;
+    display: inline-block;
+    line-height: 20px;
+    padding: 10px 0;
+    text-indent: 10px;
+    border-bottom: 1px solid black;
 }
 
 main aside nav ul li a:hover{
-    color: steelblue;
-
+    color: blue;
 }
 
 main section#outer_section {
     margin-left: 150px;
-
     height: 500px;
 }
-
-
 
 article.centered_data:before {
     content: '';
@@ -137,8 +125,6 @@ main section#outer_section section#top_section {
     text-align:center;
     height: 300px;
     overflow: auto;
-    /*display: inline-block;*/
-    /*clear: left;*/
 }
 
 section#bottom_section {
@@ -188,11 +174,6 @@ article#ribbon_box div#ribbon {
    z-index: 1;
    overflow: hidden;
    width: 75px; height: 75px; 
-}
-
-body > footer {
-    clear: both;
-    
 }
 
 body > footer header {
