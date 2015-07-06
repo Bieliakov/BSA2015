@@ -1,40 +1,20 @@
-/**/
 function Model(obj){
-    this.name = obj.name;
-    this.age = obj.age;
-    this.year = obj.year;
-    this.examsTaken = obj.examsTaken;
-    this.age = obj.age;
-    this.changed = false;
-}
-
-/*
-function Model(obj){
-    
-    
     for (var prop in obj){
-
         if (obj.hasOwnProperty(prop) && typeof prop != 'function'){
-
-            this.prop = obj[prop]
+            this[prop] = obj[prop]
         }
-        console.log(prop)
-        console.log(this.prop)
     }
-    console.log(obj.constructor())
-    console.log(this)
     return this;
 }
-*/
 
+// works without it
+/* 
 Model.prototype.takeExam = function (){
     this.examsTaken++;
     this.changed = true;
-    
 }
-
+*/
 // test case
-
 
 var Student = new Model({
     name: 'Piotr',
@@ -50,5 +30,5 @@ var Student = new Model({
 for (var prop in Student){
     console.log(prop, ':', Student[prop])
 }
-
+console.log(Student)
 */
