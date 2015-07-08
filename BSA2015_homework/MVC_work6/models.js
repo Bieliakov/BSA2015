@@ -9,7 +9,7 @@ function Model(obj){
 
 // testing code
 
-/*
+
 var Student = new Model({
     name: 'Piotr',
     age: 22,
@@ -20,4 +20,4 @@ var Student = new Model({
         this.changed = true;
     }
 });
-*/
+/**/

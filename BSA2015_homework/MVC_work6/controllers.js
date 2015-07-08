@@ -16,14 +16,10 @@ function Controller(obj_controller){
         $('#' + that.elementId).append(render);
 
         that.checkChanges();
-
-        for (var prop in that.clickHandlers){
-            if (that.clickHandlers[prop] in that){
-                $(prop).on('click', function(){ 
-                    that.updateExams();
-                });
-            };
-        };
+        
+        $('#' + that.elementId).delegate('button', 'click', function(){
+            that.updateExams();
+        });
     })();
 }
 
@@ -32,7 +28,7 @@ Controller.prototype = {
         setInterval($.proxy(function(){
             if (this.model.changed) {
                 this.render();
-                //console.log(this.model.examsTaken);
+                console.log(this.model.examsTaken);
                 //console.log(this.model.changed);
                 this.model.changed = false;
             }
@@ -42,7 +38,6 @@ Controller.prototype = {
 
 // testing code
 
-/*
 var StudentController = new Controller({
     model: Student,
     elementId: 'student-container',
@@ -57,4 +52,4 @@ var StudentController = new Controller({
     },
 
 });
-*/
+/**/
