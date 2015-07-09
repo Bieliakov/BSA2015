@@ -1,8 +1,7 @@
 
 function Controller(obj_controller){
     
-    var that = this,
-        render;
+    var that = this;
 
     for (var prop in obj_controller){
         if (obj_controller.hasOwnProperty(prop) && typeof prop != 'function'){
@@ -10,15 +9,22 @@ function Controller(obj_controller){
         };
     };
 
-    render = this.render();
-
     this.init = (function(){
-        $('#' + that.elementId).append(render);
+        
+        $('#' + that.elementId).append(that.render());
 
         that.checkChanges();
         
-        $('#' + that.elementId).delegate('button', 'click', function(){
-            that.updateExams();
+        $('#' + that.elementId).delegate('button', 'click', function(event){
+            event.stopImmediatePropagation();
+            //console.log($(event.target).attr('id'));
+
+            for (var prop in that.clickHandlers){
+                if (prop === '#' + $(event.target).attr('id')) {
+                    //console.log(that.clickHandlers[prop]); 
+                    that[that.clickHandlers[prop]](); // invokes updateExams function in our example
+                }                
+            }
         });
     })();
 }
@@ -27,8 +33,8 @@ Controller.prototype = {
     checkChanges: function(){
         setInterval($.proxy(function(){
             if (this.model.changed) {
-                this.render();
-                console.log(this.model.examsTaken);
+                $('#' + this.elementId).empty();
+                $('#' + this.elementId).append(this.render());
                 //console.log(this.model.changed);
                 this.model.changed = false;
             }
@@ -42,7 +48,8 @@ var StudentController = new Controller({
     model: Student,
     elementId: 'student-container',
     render: function(){
-        return '<span>' + this.model.name + '</span><button id="student-exams-button">Increase exams taken</button>';
+        return '<span>' + this.model.name + '</span><button id="student-exams-button">Increase exams taken</button>' +
+        '<span>' + this.model.examsTaken + '</span>'; // added for visualization
     },
     clickHandlers: {
         '#student-exams-button': 'updateExams'
