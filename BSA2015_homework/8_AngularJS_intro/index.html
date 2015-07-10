@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="app">
 <head>
-    <title>Simple app</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
-    <script src="controller.js"></script>
+    <title>Angular app</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
+
 </head>
 <body>
-<div ng-controller='MyController'>
-    <input ng-model="name" type="text" placeholder="Your name">
-    <h1>Hello {{ name }}</h1>
-    <h5>{{ clock.now }}</h5>
-</div>
+
+    <div class="people-list" ng-controller="firstController">
+        <div ng-repeat="person in people">
+            <h2>{{ person.name }}</h2>
+            <h2>{{ person['home city'] }}</h2>
+            <h3>{{ person.age }}</h3>
+
+        </div>
+        <span>People lenght: {{ people.length }}</span>
+        <button ng-click="addPerson()">Add user</button>
+        <button ng-click="removePerson()">Remove  user</button>
+    </div>
+
+
+<script src="js/controller.js"></script>
 </body>
 </html>
