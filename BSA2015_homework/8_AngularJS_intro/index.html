@@ -1,24 +1,59 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="app">
 <head>
     <title>Angular app</title>
+    <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
-
+    <link  rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
 
-    <div class="people-list" ng-controller="firstController">
-        <div ng-repeat="person in people">
-            <h2>{{ person.name }}</h2>
-            <h2>{{ person['home city'] }}</h2>
-            <h3>{{ person.age }}</h3>
+    <div class="people_list" ng-controller="usersController">
+        <div>
+            <div>Количество пользователей: {{ people.length }}</div>
+            <div>Поиск по имени пользователя: </div>
+            <input type="text" ng-model="search.name" />
+        </div>
+
+        <div ng-repeat="person in people | filter:search"
+             ng-show="showPeopleList">
+
+
+            <div>Пользователь: {{ person.name | uppercase }}</div>
+            <div>Город: {{ person.home_city }}</div>
+            <div>Возраст: {{ person.age }}</div>
+            <img ng-src="avatars/{{ person.avatar }}"/>
+
+
+            <button ng-click="removePerson($index)">Remove  user</button>
 
         </div>
-        <span>People lenght: {{ people.length }}</span>
-        <button ng-click="addPerson()">Add user</button>
-        <button ng-click="removePerson()">Remove  user</button>
+        <div>
+            <button ng-click="addPerson()">Add user</button>
+            <button ng-click="toggleViewPeople()">Toggle users</button>
+        </div>
     </div>
 
+    <div class="products_list" ng-controller="productsController">
+        <div>Количество продуктов: {{ products.length }}</div>
+        <div>Поиск по продуктам (введите цену или наименование товара): </div>
+        <input type="text" ng-model="search" />
+        <div ng-repeat="product in products | filter: search track by product.title"
+             ng-show="showProductsList">
+
+            <div>{{ product.title }}</div>
+            <div>{{ product.price }}</div>
+
+            <button ng-click="addProduct()">Add product</button>
+            <button ng-click="removeProduct($index)">Remove product</button>
+
+
+        </div>
+
+        <div>
+            <button ng-click="toggleViewProducts()">Toggle products</button>
+        </div>
+    </div>
 
 <script src="js/controller.js"></script>
 </body>

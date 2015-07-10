@@ -1,0 +1,16 @@
+.people_list {
+    float: left;
+    width: 50%;
+
+}
+
+.products_list {
+    float: right;
+    width:50%;
+}
+
+img {
+    max-width:100px;
+}
+
+
