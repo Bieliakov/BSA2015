@@ -38,19 +38,20 @@
         <div>Количество продуктов: {{ products.length }}</div>
         <div>Поиск по продуктам (введите цену или наименование товара): </div>
         <input type="text" ng-model="search" />
-        <div ng-repeat="product in products | filter: search track by product.title"
+        <div ng-repeat="product in products | filter: search"
              ng-show="showProductsList">
 
-            <div>{{ product.title }}</div>
-            <div>{{ product.price }}</div>
+            <div>Наименование товара: {{ product.title }}</div>
+            <div>Цена товара: {{ product.price }}</div>
 
-            <button ng-click="addProduct()">Add product</button>
+
             <button ng-click="removeProduct($index)">Remove product</button>
 
 
         </div>
 
         <div>
+            <button ng-click="addProduct()">Add product</button>
             <button ng-click="toggleViewProducts()">Toggle products</button>
         </div>
     </div>
