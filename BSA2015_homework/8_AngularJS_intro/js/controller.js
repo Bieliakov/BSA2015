@@ -2,8 +2,6 @@
 angular.module('app', [])
     .controller('usersController', function($scope) {
 
-
-
         $scope.people = [{name: 'John', home_city: 'New York', age: '20', avatar: 'jimKerry.gif'},
                         {name: 'Mark', home_city: 'Kyiv', age: '23', avatar: 'cat.jpg'}];
         $scope.addPerson = function (){
