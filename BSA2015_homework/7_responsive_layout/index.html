@@ -1,174 +1,121 @@
 ﻿<!DOCTYPE html>
 <html>
-{% block head %}
-    <title>{% block title %}Index(blog) page{% endblock %}</title>
-
-    
-{% endblock %}
-{% load staticfiles %}
-    
-    <!--[if lt IE 9]><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><![endif]-->
-    <!--[if IE 9]><!--><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><!--<![endif]-->
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'blog/styles/bootstrap.min.css' %}" />-->   
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/styles/style.css' %}" />
-    
-    <!--sharing via vkontakte button-->
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
-    <!--end sharing via vkontakte button-->
+<head>
+    <title>Index(blog) page</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <meta name='viewport' content='width=device-width, initial-scale=1 user-scalable=no'/>
 </head>
 
 <body>
 
-<!--sharing via facebook button-->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=686268061503894";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<!--end sharing via facebook button-->
-
-{% block header %}
-
-<header class='container'>
-    <nav class='row'>
-        <ul class='col-md-12 col-sm-12'>
-            <li><a href="/" class='selected'>Home</a></li>
-            <li id='dropdown_blog'>
-                <a href="{% url 'blog:index'%}" >Blog >></a>
-                <div id="dropdown_div">
-                    <ul id="dropdown_list">
-                        {% for category in categories %}
-                        <li><a href="{% url 'blog:category' category.slug %}">{{category.name}}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                
-            </li>
-            <li><a href="{% url 'home:about_me'%}">About me</a></li>
-
+<header>
+    <img src="http://kevingrandon.github.io/slides-fxos-technical-overview/img/web-logos.png" alt='logo' />
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">About me</a></li>
         </ul>
     </nav>
 </header>
 
-{% endblock %} <!--header-->
-
-{% block main %}
-
-<main  class='container'>
-    {% block section %}
-    <section class='row col-md-8'>
-        {% if latest_post_list %}
-                    <!--<script type="text/javascript"> 
-                        var tags = [];
-
-                    </script>-->
-            {% for post in latest_post_list %}
-                <article>
-                    <header>
-                        <h2><a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a></h2>
-                        <p>Posted by {{ post.author}} on {{ post.pub_date }} in {{ post.category }}</p>
-                    </header>
-                    <content>
-                         <!--<img src="{% static post.image.url %}"/>-->
-                        <img src="{% static post.image_thumbnail_big.url %}"/>
-                        
-                        <p>{{ post.body|truncatechars:800 }}</p>
-                        <a href="{% url 'blog:detail' post.slug %}"><button type="button" class='btn'>Read more</button></a>
-
-                        
-                    </content>   
-                    <footer class="tags">tags:
-
-                    {% for tag in post.tag.all %}
-
-                        <a href="tag/{{ tag.slug }}">{{ tag.name }}</a>
-                        {% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-
-                        
-                    <!--<a href="/blog/category/{{ post.category }}">{{ post.category }}</a>-->
-                    </footer>
-                     
-                </article>
-            {% endfor %}
-
-        {% else %}
-            <p>No posts are available.</p>
-        {% endif %}
-    
-    </section>
-    {% endblock %} <!--section-->
-    {% block aside %}
-    <aside class='row col-md-4'>
-        {% block first_aside %}
-        <p>Categories: </p>
-        {% for category in categories %}
+<main>
+    <section>
         <article>
             <header>
-                
-                <h2><a href="{% url 'blog:category' category.slug %}">{{category.name}}</a></h2>
+                <h2><a href="#">First post title</a></h2>
+                <p>Posted by me on date in <a href="#">category</a></p>
             </header>
+            <content>
+                <img src="images/raduga.jpeg"/>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dui lorem, elementum in commodo ac, faucibus vel arcu. Pellentesque vestibulum justo massa, in ornare augue bibendum in. Nam ullamcorper massa ac tempus lobortis. Fusce at porta mi. Cras porta mi ut pulvinar gravida. Sed facilisis, libero et consequat porta, tellus risus maximus nisl, volutpat vulputate massa enim quis orci. Aenean feugiat fermentum quam, sit amet interdum dui venenatis id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed dapibus lacus non purus porta, eget semper eros ultrices. Nunc pharetra, massa id sagittis faucibus, lorem lorem tristique ex, in sagittis erat ex ut mauris. Donec imperdiet varius venenatis. Donec auctor nulla sit amet ultrices consectetur. Integer ut magna id quam condimentum scelerisque...
+                    <a href="#">
+                        <button type="button" class='btn'>Read more</button>
+                    </a>
+                </p>
+            </content>   
+            <footer class="tags">
+                tags: <a href="#">tag 1</a>
+            </footer>
         </article>
-        {% endfor %}
-        {% endblock %} <!--first_aside-->
-    </aside>
-    <aside>
-        <p>Recent posts: </p>
-        {% for post in three_last_posts %}
         
         <article>
             <header>
-                <img src="{% static post.image_thumbnail_small.url %}"/>
-                <h2><a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a></h2>
-                <p>{{ post.pub_date }} in {{ post.category }}</p>
+                <h2><a href="#">Second post title</a></h2>
+                <p>Posted by me on date in <a href="#">category</a></p>
             </header>
             <content>
-                 <!--<img src="{% static post.image.url %}"/>-->
-                
-                
-                <p>{{ post.body|truncatechars:150 }}</p>
-                <a href="{% url 'blog:detail' post.slug %}"><button type="button" class='btn'>Read more</button></a>
-                
+                <img src="images/Logo_Python.png"/>
+                <p> Pellentesque accumsan leo quis mi efficitur tempor. Etiam sagittis suscipit fermentum. Cras facilisis nisi dolor, eu ullamcorper erat pretium consectetur. Proin luctus lacus ac rhoncus porttitor. Vivamus tempus elit a arcu lobortis, a rutrum nunc fringilla. Ut mollis cursus vehicula. Aenean iaculis imperdiet mi vitae imperdiet. Sed ullamcorper, ex facilisis sagittis molestie, tortor elit vehicula elit, eget luctus lacus libero id odio. Vivamus erat quam, efficitur sed ligula eget, rhoncus aliquam metus. Praesent vel augue eget orci suscipit porttitor...
+                    <a href="#">
+                        <button type="button" class='btn'>Read more</button>
+                    </a>
+                </p>
+            </content>   
+            <footer class="tags">tags: <a href="#">tag 2</a>
+            </footer>
+        </article>
+    </section>
+
+    <aside>
+        <p>Categories: </p>
+        <article>
+            <header>
+                <h2><a href="#">Category</a></h2>
+            </header>
+        </article>
+    </aside>
+    <aside class='aside_recent_posts'>
+        <p>Recent posts: </p>
+        <article>
+            <header>
+                <img src="images/raduga.jpeg"/>
+                <h2><a href="#">First post title</a></h2>
+                <p>post.pub_date in <a href="#">category</a></p>
+            </header>
+            <content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dui lorem, elementum in commodo ac, faucibus vel arcu. Pellentesque vestibulum justo massa, in ornare augue bibendum in. Nam ullamcorper massa ac...
+                    <a href="#">
+                        <button type="button" class='btn'>Read more</button>
+                    </a>
+                </p>
+
             </content>   
         </article>
-        {% endfor %}
+        <article>
+            <header>
+                <img src="images/Logo_Python.png"/>
+                <h2><a href="#">First post title</a></h2>
+                <p>post.pub_date in <a href="#">category</a></p>
+            </header>
+            <content>
+                <p>Pellentesque accumsan leo quis mi efficitur tempor. Etiam sagittis suscipit fermentum. Cras facilisis nisi dolor, eu ullamcorper erat pretium consectetur. Proin luctus lacus ac rhoncus porttitor. Vivamus tempus elit a arcu lobortis, a rutrum nunc fringilla. Ut mollis cursus vehicula....
+                    <a href="#">
+                        <button type="button" class='btn'>Read more</button>
+                    </a>
+                </p>
+            </content>   
+        </article>
     </aside>
     <aside>
         <p>Tags:</p>
-        {% for tag in tags %}
-            <a href="{% url 'blog:tag' tag.slug %}">{{ tag.name }}</a>
-            {% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </aside>
-    {% endblock %} <!--aside-->
-</main>
-{% endblock %} <!--main-->
+            <a href="#">some tag</a>
 
-{% block footer %}
-<footer class='container'>
-    <nav class='row'>
-        <ul class='col-md-12 col-sm-12'>
-            <li><a href="{% url 'blog:index'%}">Home</a></li>
-            <li id='dropdown_blog'><a href="{% url 'blog:index'%}" >Blog >></a></li>
-            
-            {% if user.is_authenticated %}
-            <li><a href="/blog/logout/">Logout</a></li>
-            {% else %}
-            <li><a href="/blog/register/">Register Here</a></li>
-            <li><a href="/blog/login/">Login</a></li>
-            {% endif %}
+    </aside>
+
+</main>
+
+<footer>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">About me</a></li>
+
         </ul>
     </nav>
-    <p>&copy; Copyright 2015, <a href='#'>my website</a>
-    </p>
+    <p>&copy; Copyright 2015, <a href='#'>my website</a></p>
 </footer>
-
-<script type="text/javascript" src="{% static 'blog/scripts/main.js' %}"></script>
-
-{% endblock %} <!--footer-->
 
 </body>
 </html>
