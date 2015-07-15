@@ -1,0 +1,26 @@
+#photos_container {
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    margin-top: 30px;
+}
+
+.background{
+    position: fixed;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100% ;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.fullPicture {
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top: -300px;
+    margin-left: -300px;
+
+
+}

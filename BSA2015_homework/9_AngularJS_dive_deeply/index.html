@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>HW9 Angular dive</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
+    <!--script for angular-resource-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    
+</head>
+
+    <div ng-controller="testController as ctrl" ng-cloak>
+        <div id='photos_container' ng-repeat="photo in ctrl.photos">
+            <!--<img ng-src="{{photo.thumbnailUrl}}"></img>-->
+            <div custom-directive collection="ctrl.photos"></div>
+            <div>{{photo.title}}</div>
+        </div>
+
+    </div>
+
+<script src="scripts/app_angular_module.js"></script>
+<script src='scripts/controller.js'></script>
+<script src='scripts/service_$resource.js'></script>
+<script src='scripts/factory_$http.js'></script>
+
+
+</body>
+</html>
