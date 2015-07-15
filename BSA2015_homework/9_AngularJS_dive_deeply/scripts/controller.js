@@ -1,5 +1,5 @@
 (function() {
-    angular.module('app')
+    angular.module('app', ['ngResource'])
         .controller('testController', testController)
         .directive('customDirective', customDirective);
 

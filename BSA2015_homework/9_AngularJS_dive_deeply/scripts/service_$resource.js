@@ -17,5 +17,6 @@
 //            });
 //            return firstSeveralPhotos;
 //        }; // end getPhotos function
+//
 //    } // end 'Photos' service
 //})();
