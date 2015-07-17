@@ -1,0 +1,1 @@
+This is my tenth homework. The homework is dedicated to testing of JS code. I use Jasmine 2.3.4 testing framework. Main file is SpecRunner.html .  
