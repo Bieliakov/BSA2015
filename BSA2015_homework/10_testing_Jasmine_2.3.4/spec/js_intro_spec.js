@@ -14,14 +14,17 @@ describe("js_intro test suite", function() {
         describe("when new", function () {
 
             it('should have own "name" property and it should be string', function () {
+                
                 // regexp reference
                 // ^ - search from begining of a string
                 // \ {0,1} - might be a spa ce or not ({0,1} equivalent to ?)
-                // [a-zA-Z]{1,} - should be one or more characters ({1,} equivalent to +)
-                // [a-zA-Z]{0,} - might be a lot of characters or none of them ({0,} equivalent to *)
+                // [a-z]{1,} - should be one or more characters ({1,} equivalent to +)
+                // [a-zA-Z{0,} - might be a lot of characters or none of them ({0,} equivalent to *)
                 // $ - end of a sttring
-                // [1-9]
-                expect(man.name).toMatch(/^\ {0,1}[a-zA-Z]{1,}\ {0,1}[a-zA-Z]{0,}\ {0,1}$/);
+                // [0-9] - numbers from 0 to 9 included
+                // i - flag case insensitivity
+                
+                expect(man.name).toMatch(/^\ {0,1}[a-zA-Z]{1,}\ {0,1}[a-zA-Z]{0,}\ {0,1}$/i);
                 expect(man.hasOwnProperty('name')).toBe(true);
             });
 
@@ -51,7 +54,7 @@ describe("js_intro test suite", function() {
         describe("when new", function() {
 
             it('should have "name" property and it should be string', function () {
-                expect(student.name).toMatch(/^\ {0,1}[a-zA-Z]{1,}\ {0,1}[a-zA-Z]{0,}\ {0,1}$/);
+                expect(student.name).toMatch(/^\ {0,1}[a-z]{1,}\ {0,1}[a-z]{0,}\ {0,1}$/i);
             });
 
             it('should have "age" property and it should be positive small integer number', function () {
@@ -85,7 +88,7 @@ describe("js_intro test suite", function() {
         describe("when new", function() {
 
             it('should have "name" property and it should be string', function () {
-                expect(professor.name).toMatch(/^\ {0,1}[a-zA-Z]{1,}\ {0,1}[a-zA-Z]{0,}\ {0,1}$/);
+                expect(professor.name).toMatch(/^\ {0,1}[a-z]{1,}\ {0,1}[a-z]{0,}\ {0,1}$/i);
             });
 
             it('should have "age" property and it should be positive small integer number', function () {
