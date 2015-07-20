@@ -53,24 +53,24 @@ countryRouter.route('/hotel/:hotelID')
     .get(function(request, response){
         response.send(countries.getHotelByID(request.params.hotelID));
     })
-	.delete(function(request, response){
+    .delete(function(request, response){
         response.send(countries.removeHotel(request.params.hotelID));
-		
-	})
+        
+    })
     .put(function(request, response){
         
         var query = transformQuery(request.body);
         
         response.send(countries.updateHotel(request.params.hotelID, query));
 
-	})
+    })
     .patch(function(request, response){
         
         var query = transformQuery(request.body);
         
         response.send(countries.updateHotel(request.params.hotelID, query));
 
-	});
+    });
 
     
     
@@ -85,7 +85,7 @@ function transformQuery(requestBody){
             query += '&';
         }
     };
-    console.log(query);
+    //console.log(query);
     return query;
 }
 

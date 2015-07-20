@@ -22,8 +22,8 @@ var countries = {
         ]
     },
     
-	"UK" : {
-		"description": "United Kingdom country description",
+    "UK" : {
+        "description": "United Kingdom country description",
         "hotels": [
             {
                 "id": "4",
@@ -41,7 +41,7 @@ var countries = {
                 "description": "Long river hotel description"
             }
         ]
-	}
+    }
 }
 
 function getCountryBySlug(countryNameFromSlug){
@@ -63,9 +63,9 @@ function getCountryBySlug(countryNameFromSlug){
 }
 
 function getHotelsByCountry(country) {
-	var hotelsInCounty = countries[country].hotels;
+    var hotelsInCounty = countries[country].hotels;
     
-	return JSON.stringify(hotelsInCounty);
+    return JSON.stringify(hotelsInCounty);
 }
 
 function getHotelByID(hotelID){
@@ -94,7 +94,7 @@ function getHotelByID(hotelID){
 
 
 function appendCountry(query) {
-	var output = '';
+    var output = '';
     var countryName = '';
     var countryNames = Object.keys(countries);
     var fullQueryString = query.toString();
@@ -338,10 +338,11 @@ function updateHotel(hotelID, query){
 module.exports = {
     countries: countries,
     getCountryBySlug: getCountryBySlug,
-	getHotelsByCountry : getHotelsByCountry,
+    getHotelsByCountry : getHotelsByCountry,
     getHotelByID: getHotelByID,
     appendCountry: appendCountry,
     addHotelToCountry: addHotelToCountry,
     removeHotel: removeHotel,
     updateHotel: updateHotel,
 }
+

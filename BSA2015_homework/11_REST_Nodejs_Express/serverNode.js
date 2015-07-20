@@ -47,17 +47,17 @@ http.createServer(function (request, response) {
 
     // add country to country list
     // add country in format ?name=parameter&
-	if (request.url.search(/\/restapi\/country\/?$/) != '-1'  && request.method == 'POST') {
+    if (request.url.search(/\/restapi\/country\/?$/) != '-1'  && request.method == 'POST') {
 
         request.on('data', function (query){
             output = countries.appendCountry(query)
             writeResponseAndEnd(output);
         });
-		request.on('end', function (){
-			response.end();
+        request.on('end', function (){
+            response.end();
         });
        
-	}
+    }
    
     // add hotel to specific country
     // add hotel in format ?name=parameter
@@ -68,16 +68,16 @@ http.createServer(function (request, response) {
         // get country name from the url
         var requestedCountryName = request.url.replace(/(\/restapi\/country\/)([a-z]+\_?\-?[a-z]*)\/?$/i, '$2');
         
-		request.on('data', function (query){
+        request.on('data', function (query){
             output = countries.addHotelToCountry(requestedCountryName, query);
             writeResponseAndEnd(output)
-		});
+        });
 
-		request.on('end', function (){
-			response.end();
-		})
+        request.on('end', function (){
+            response.end();
+        })
        
-	}
+    }
     
     // delete specific hotel by id
     
@@ -100,11 +100,11 @@ http.createServer(function (request, response) {
         request.on('data', function (query){
             output = countries.updateHotel(requestedHotelId, query);
             writeResponseAndEnd(output)
-		});
+        });
 
-		request.on('end', function (){
-			response.end();
-		});
+        request.on('end', function (){
+            response.end();
+        });
         
     }
 
