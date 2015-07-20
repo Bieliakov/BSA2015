@@ -345,9 +345,3 @@ module.exports = {
     removeHotel: removeHotel,
     updateHotel: updateHotel,
 }
-
-
-countries["Ukra"] = {};
-countries["Ukra"].hotels = [];
-countries["Ukra"].description = "some description";
-countries["Ukraine"].hotels.push({ "id": "27401435957290230", "name" : "Ukra","description": "sadasd"});

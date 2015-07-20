@@ -6,7 +6,7 @@ var countries = require('./countries');
 
 var port = 8081;
 
-// format http://localhost:8081/country and so on
+// format http://localhost:8081/restapi/country and so on
 
 http.createServer(function (request, response) {
     
@@ -17,12 +17,12 @@ http.createServer(function (request, response) {
     //console.log(request.url)
 
     // get country list 
-    if (request.url.search(/\/country\/?$/) != '-1' && request.method == 'GET' ) {
+    if (request.url.search(/\/restapi\/country\/?$/) != '-1' && request.method == 'GET' ) {
         
         output = JSON.stringify(Object.keys(countries.countries));
         writeResponseAndEnd(output);
 
-    } else if (request.url.search(/\/country\/[a-z]+\_?\-?[a-z]*\/?$/i) != '-1' && request.method == 'GET' ) {
+    } else if (request.url.search(/\/restapi\/country\/[a-z]+\_?\-?[a-z]*\/?$/i) != '-1' && request.method == 'GET' ) {
         // get hotel list in specific country
         
         // /country/CountrynameParameter format
@@ -30,24 +30,24 @@ http.createServer(function (request, response) {
         // in current REST API there wasn't any requirements for slugs, so it will be simplified a bit
         
         // extract from request.url part with countryName
-        var countryNameFromSlug = request.url.replace(/(\/country\/)([a-z]+\_?\-?[a-z]*)\/?$/i, '$2');
+        var countryNameFromSlug = request.url.replace(/(\/restapi\/country\/)([a-z]+\_?\-?[a-z]*)\/?$/i, '$2');
         
         //console.log(countryNameFromSlug)
         output = countries.getCountryBySlug(countryNameFromSlug);
         writeResponseAndEnd(output);
         
         
-    } else if (request.url.search(/\/hotel\/[0-9]+\/?$/i) != '-1' && request.method == 'GET' ) {
+    } else if (request.url.search(/\/restapi\/hotel\/[0-9]+\/?$/i) != '-1' && request.method == 'GET' ) {
 
         //console.log(request.url)
-        var requestedHotelId = request.url.replace(/(\/hotel\/)([0-9]+)\/?$/i, '$2');
+        var requestedHotelId = request.url.replace(/(\/restapi\/hotel\/)([0-9]+)\/?$/i, '$2');
         output = countries.getHotelByID(requestedHotelId);
         writeResponseAndEnd(output);
     };
 
     // add country to country list
     // add country in format ?name=parameter&
-	if (request.url.search(/\/country\/?$/) != '-1'  && request.method == 'POST') {
+	if (request.url.search(/\/restapi\/country\/?$/) != '-1'  && request.method == 'POST') {
 
         request.on('data', function (query){
             output = countries.appendCountry(query)
@@ -63,10 +63,10 @@ http.createServer(function (request, response) {
     // add hotel in format ?name=parameter
     // or ?name=parameter&description=parameter2
     
-    if (request.url.search(/\/country\/[a-z]+\_?\-?[a-z]*$/i) != '-1'  && request.method == 'POST') {
+    if (request.url.search(/\/restapi\/country\/[a-z]+\_?\-?[a-z]*$/i) != '-1'  && request.method == 'POST') {
 
         // get country name from the url
-        var requestedCountryName = request.url.replace(/(\/country\/)([a-z]+\_?\-?[a-z]*)\/?$/i, '$2');
+        var requestedCountryName = request.url.replace(/(\/restapi\/country\/)([a-z]+\_?\-?[a-z]*)\/?$/i, '$2');
         
 		request.on('data', function (query){
             output = countries.addHotelToCountry(requestedCountryName, query);
@@ -81,19 +81,19 @@ http.createServer(function (request, response) {
     
     // delete specific hotel by id
     
-    if (request.url.search(/^\/hotel\/[0-9]+$/) != '-1' && request.method == 'DELETE'){
+    if (request.url.search(/\/restapi\/hotel\/[0-9]+$/) != '-1' && request.method == 'DELETE'){
 
-        var requestedHotelId = request.url.replace(/(\/hotel\/)([0-9]+)\/?$/i, '$2');
+        var requestedHotelId = request.url.replace(/(\/restapi\/hotel\/)([0-9]+)\/?$/i, '$2');
         output = countries.removeHotel(requestedHotelId);
         writeResponseAndEnd(output);
     }
 
     // method is patch or put for updating information about specific hotel
     
-    if (request.url.search(/^\/hotel\/[0-9]+$/) != '-1' && request.method == 'PATCH' || 
-        request.url.search(/^\/hotel\/[0-9]+$/) != '-1' && request.method == 'PUT'){
+    if (request.url.search(/\/restapi\/hotel\/[0-9]+$/) != '-1' && request.method == 'PATCH' || 
+        request.url.search(/\/restapi\/hotel\/[0-9]+$/) != '-1' && request.method == 'PUT'){
         
-        var requestedHotelId = request.url.replace(/(\/hotel\/)([0-9]+)\/?$/i, '$2');
+        var requestedHotelId = request.url.replace(/(\/restapi\/hotel\/)([0-9]+)\/?$/i, '$2');
         
         //console.log(requestedHotelId);
         

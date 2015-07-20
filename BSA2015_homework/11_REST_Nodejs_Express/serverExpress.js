@@ -64,6 +64,13 @@ countryRouter.route('/hotel/:hotelID')
         response.send(countries.updateHotel(request.params.hotelID, query));
 
 	})
+    .patch(function(request, response){
+        
+        var query = transformQuery(request.body);
+        
+        response.send(countries.updateHotel(request.params.hotelID, query));
+
+	});
 
     
     
