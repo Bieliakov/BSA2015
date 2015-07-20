@@ -1,0 +1,9 @@
+{
+  "name": "RestExpress",
+  "dependencies": {
+    "express": "^4.13.1",
+    "gulp": "^3.9.0",
+    "gulp-nodemon": "^1.3.7",
+    "body-parser": "^1.13.2",
+  }
+}
