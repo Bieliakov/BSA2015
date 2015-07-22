@@ -1,0 +1,41 @@
+{
+    "name": "Ukraine",
+    "description": "Ukraine country description",
+    "hotels": [
+      {
+        "id": "1",
+        "name": "Tourist",
+        "description": "Tourist hotel description"
+      },
+      {
+        "id": "2",
+        "name": "Slavutych",
+        "description": "Slavutych hotel description"
+      },
+      {
+        "id": "3",
+        "name": "Karavella",
+        "description": "Karavella hotel description"
+      }
+    ]
+},
+{ "name": "UK",
+  "description": "United Kingdom country description",
+  "hotels": [
+    {
+      "id": "4",
+      "name": "Great Palace",
+      "description": "Great Palace hotel description"
+    },
+    {
+      "id": "5",
+      "name": "Riviera",
+      "description": "Riviera hotel description"
+    },
+    {
+      "id": "6",
+      "name": "Long river",
+      "description": "Long river hotel description"
+    }
+  ]
+}
