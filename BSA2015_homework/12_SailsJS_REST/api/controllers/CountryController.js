@@ -8,15 +8,14 @@
 var fs = require('fs');
 
 module.exports = {
-  find: getAllCountries,
 
   getAllCountries: getAllCountries,
   getCountryBySlug: getCountryBySlug,
-  getHotelByID: getHotelByID,
   appendCountry: appendCountry,
-  addHotelToCountry: addHotelToCountry,
-  removeHotel: removeHotel,
-  updateHotel: updateHotel,
+  find: getHotelByID,
+  create: addHotelToCountry,
+  destroy: removeHotel,
+  update: updateHotel,
 
   _config : {
     blueprints: {
@@ -35,7 +34,7 @@ module.exports = {
     res.view('customMsg.ejs', {message: 'The best custom message ever :)'});
   }
   /*
-  // I've played a bit with MySQL DB :)
+  // I've played a bit with MySQL DB, firstly :)
 
   getAllCountries: function(req, res){
     Country.find().populate('hotels').exec(function(err,result){
@@ -143,144 +142,107 @@ function getHotelByID(req, res){
 
 
 function appendCountry(req,res) {
-  var query = '?name=' + req.param('name');// + '&' + req.param('description');
 
   var output = '';
-  var countryName = '';
+  var countryName = req.param('name');
+  if (!countryName) {
+    output = 'Please, provide a country title.';
+    return res.send(output);
+  }
+
   var countryNames = Object.keys(Country.countries);
-  var fullQueryString = query.toString();
 
-  var positionDescription = fullQueryString.search(/&description=/);
-  var countryDescription = 'some description';
+  var countryLowerCased = countryName.toLowerCase();
 
-  // if there is a "?name=" string in query
-  var positionName = fullQueryString.search(/^\?name=/);
-  if (positionName == -1){
-
-    output = 'Please enter country name in format ?name=parameter';
-
-  } else {
-
-    // if there is only name property is specified slice till the end of the URL
-    countryName = fullQueryString.slice(positionName + 6);
-    var countryLowerCased = countryName.toLowerCase();
-
-    if (positionDescription != -1) {
-      // if there are name and description values specified - slice till the beginning of the description property
-      countryName = fullQueryString.slice(positionName + 6, positionDescription);
-      countryLowerCased = countryName.toLowerCase();
-
-      // slice description value till the end of the URL
-      countryDescription = fullQueryString.slice(positionDescription + 13);
-      //console.log(positionDescription);
-      //console.log(countryDescription);
-    }
-
-    for (var i = 0; i < countryNames.length; i++){
-      //console.log(countryNames[i].toLowerCase())
-      //console.log(countryLowerCased)
-      if (countryLowerCased == countryNames[i].toLowerCase()){
-        output = 'Sorry, there is already ' + countryName + ' country present in our database.';
-        break;
-      } else if (i == countryNames.length - 1) {
-
-        fs.appendFile('./api/models/Country.js',
-          'countries["' + countryName + '"] = {};\n' +
-          'countries["' + countryName + '"].hotels = [];\n' +
-          'countries["' + countryName + '"].description = "' + countryDescription + '";\n'
-          , function (err) {
-            if (err) throw err;
-            console.log('The "data to append" was appended to file!');
-          });
-
-        output = 'The ' + countryName + ' country is appended to the database';
-      }
-
-    } // end for loop
-
-  } // end else block where positionName != 1
-  res.send(output);
-}
-
-function addHotelToCountry(req, res){
-  //console.log(req.param('name'));
-  //console.log(req.param('hotelName'));
-  var requestedCountryName = req.param('name');
-  var query = '?name=' + req.param('hotelName');
-  var output = '';
-  var hotelName = '';
-  var countryNames = Object.keys(Country.countries);
-  var countryLowerCased = requestedCountryName.toLowerCase();
-  var fullQueryString = query.toString();
-  var positionName = fullQueryString.search(/^\?name=/);
-  var positionDescription = fullQueryString.search(/&description=/);
-  var hotelDescription = 'some description';
+  var countryDescription = req.param('description') || 'some description';
 
   for (var i = 0; i < countryNames.length; i++){
     //console.log(countryNames[i].toLowerCase())
-    //console.log(Country.countries[countryNames[i]])
+    //console.log(countryLowerCased)
     if (countryLowerCased == countryNames[i].toLowerCase()){
+      output = 'Sorry, there is already ' + countryName + ' country present in our database.';
+      break;
+    } else if (i == countryNames.length - 1) {
+      fs.appendFile('./api/models/Country.js',
+        'countries["' + countryName + '"] = {};\n' +
+        'countries["' + countryName + '"].hotels = [];\n' +
+        'countries["' + countryName + '"].description = "' + countryDescription + '";\n'
+        , function (err) {
+          if (err) throw err;
+          console.log('The "data to append" was appended to file!');
+        });
 
-      // if there is a "?name=" string in query
-      if (positionName != -1){
-        // if there is only name property is specified slice till the end of the URL
-        hotelName = fullQueryString.slice(positionName + 6);
-        var hotelLowerCased = hotelName.toLowerCase();
-
-        if (positionDescription != -1) {
-          // if there are name and description values specified - slice till the beginning of the description property
-          hotelName = fullQueryString.slice(positionName + 6, positionDescription);
-          hotelLowerCased = hotelName.toLowerCase();
-
-          // slice description value till the end of the URL
-          hotelDescription = fullQueryString.slice(positionDescription + 13);
-          //console.log(positionDescription);
-          //console.log(hotelDescription);
-        }
-
-        var currentHotelsArray = Country.countries[countryNames[i]].hotels;
-        //console.log(currentHotelsArray);
-
-        if (!currentHotelsArray.length) {
-          // if there is no specified hotel present the country db
-          appendHotel();
-          break;
-        } else {
-          // check whether specified hotel is already present in the db
-          for (var j = 0; j < currentHotelsArray.length; j++) {
-            if (currentHotelsArray[j].name.toLowerCase() == hotelLowerCased ) {
-              break;
-            } else if (j == currentHotelsArray.length - 1) {
-              appendHotel();
-            }
-          }
-
-        };
-
-        function appendHotel(){
-          fs.appendFile(
-            './api/models/Country.js',
-            'countries["' + countryNames[i] + '"].hotels.push(' +
-            '{ "id": "' + Math.floor(Math.random() * 10e16) + '", ' +
-            '"name" : "' + hotelName + '",' +
-            '"description": "' + hotelDescription + '"'
-
-            + '});\n',
-            function (err){
-              if (err) throw err;
-            });
-
-          output = 'The ' + hotelName + ' is appended to ' + countryNames[i];
-
-        };
-        //console.log(hotelLowerCased)
-        //console.log(requestedCountryName)
-      } else {
-        output = 'Please, specify a hotel name';
-      };
+      output = 'The ' + countryName + ' country is appended to the database';
     }
 
-  } // end for
+  } // end for loop
+
+  res.send(output);
+}
+
+function addHotelToCountry(req, res) {
+
+
+  var requestedCountryName = req.param('countryName');
+  var output = '';
+  var hotelName = req.param('name');
+  var countryNames = Object.keys(Country.countries);
+  var countryLowerCased = requestedCountryName.toLowerCase();
+  var hotelDescription = req.param('description') || 'some description';
+
+  if (!hotelName) {
+    output = 'Please, specify a hotel name';
+    return res.send(output);
+  }
+
+  var hotelLowerCased = hotelName.toLowerCase();
+
+  for (var i = 0; i < countryNames.length; i++) {
+    //console.log(countryNames[i].toLowerCase())
+    //console.log(Country.countries[countryNames[i]])
+    if (countryLowerCased == countryNames[i].toLowerCase()) {
+      var currentHotelsArray = Country.countries[countryNames[i]].hotels;
+      //console.log(currentHotelsArray);
+
+      if (!currentHotelsArray.length) {
+        // if there is no specified hotel present the country db
+        appendHotel();
+        break;
+      } else {
+        // check whether specified hotel is already present in the db
+        for (var j = 0; j < currentHotelsArray.length; j++) {
+          if (currentHotelsArray[j].name.toLowerCase() == hotelLowerCased) {
+            break;
+          } else if (j == currentHotelsArray.length - 1) {
+            appendHotel();
+          }
+        }
+
+      }
+
+
+      function appendHotel() {
+        fs.appendFile(
+          './api/models/Country.js',
+          'countries["' + countryNames[i] + '"].hotels.push(' +
+          '{ "id": "' + Math.floor(Math.random() * 10e16) + '", ' +
+          '"name" : "' + hotelName + '",' +
+          '"description": "' + hotelDescription + '"'
+
+          + '});\n',
+          function (err) {
+            if (err) throw err;
+          });
+
+        output = 'The ' + hotelName + ' is appended to ' + countryNames[i];
+
+      };
+      //console.log(hotelLowerCased)
+      //console.log(requestedCountryName)
+    } else if ( i == countryNames.length - 1){
+      output = 'The county title is not correct or hotel is already present in our database.'
+    }
+  }// end for
   res.send(output);
 }
 
@@ -321,42 +283,22 @@ function removeHotel(req, res) {
 function updateHotel(req, res){
 
   var hotelID = req.param('id');
-  var query = '?name=' + req.param('name');
-
   var countriesARR = Object.keys(Country.countries);
   var output = 'Sorry, there is no hotel with id ' + hotelID + ' in our database.';
-  var fullQueryString = query.toString();
-  var positionName = fullQueryString.search(/^\?name=/);
-  var positionDescription = fullQueryString.search(/&description=/);
-  var hotelName = '';
-  var hotelDescription = '';
-
-
+  var hotelName = req.param('name');
+  var hotelDescription = req.param('description');
   for (var i = 0; i < countriesARR.length; i++) {
 
     var currentHotelsArray = Country.countries[countriesARR[i]].hotels;
     //console.log(currentHotelsArray);
 
     if (!currentHotelsArray) {
-      // if there are no hotel in some countries then skip them
+      // if there are no hotels in some countries then skip them
       continue;
     };
     for (var j = 0; j < currentHotelsArray.length; j++) {
 
       if (currentHotelsArray[j].id == hotelID ) {
-        if (positionName != -1){
-          // if there is only name property is specified slice till the end of the URL
-          hotelName = fullQueryString.slice(positionName + 6);
-        }
-        if (positionDescription != -1) {
-          // if there are name and description values specified - slice till the beginning of the description property
-          hotelName = fullQueryString.slice(positionName + 6, positionDescription);
-
-          // slice description value till the end of the URL
-          hotelDescription = fullQueryString.slice(positionDescription + 13);
-          //console.log(positionDescription);
-          //console.log(hotelDescription);
-        }
         if (hotelName && hotelDescription) {
           //console.log(j)
           fs.appendFile(
@@ -386,6 +328,7 @@ function updateHotel(req, res){
             function (err){
               if (err) throw err;
             });
+          output = 'The ' + hotelName + ' is updated at the ' + countriesARR[i] + ' country';
           break;
         }
         break;

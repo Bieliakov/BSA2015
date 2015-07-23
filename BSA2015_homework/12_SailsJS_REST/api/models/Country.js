@@ -72,25 +72,12 @@ module.exports = {
 */
 };
 
-
-countries["Newcountry"] = {};
-countries["Newcountry"].hotels = [];
-countries["Newcountry"].description = "some description";
-countries["NewNEwcountry"] = {};
-countries["NewNEwcountry"].hotels = [];
-countries["NewNEwcountry"].description = "some description";
-countries["Ukraine"].hotels.push({ "id": "72681871009990580", "name" : "bestHotel","description": "some description"});
-countries["ukraine1"] = {};
-countries["ukraine1"].hotels = [];
-countries["ukraine1"].description = "some description";
-countries["ukraine&name=newHOtel"] = {};
-countries["ukraine&name=newHOtel"].hotels = [];
-countries["ukraine&name=newHOtel"].description = "some description";
-countries["Ukraine"].hotels.push({ "id": "53871794743463400", "name" : "NewHotelInUkr","description": "some description"});
-countries["Ukraine"].hotels.push({ "id": "92645542812533680", "name" : "NewHotelInUkr","description": "some description"});
-countries["Ukraine"].hotels.splice(0, 1);
-countries["Ukraine"].hotels.splice(0, 1);
-countries["Ukraine"].hotels.splice(0, 1);
-countries["Ukraine"].hotels.splice(0, 1);
-countries["UK"].hotels[1].name = "newName";
-countries["UK"].hotels[1].name = "newName";
+countries["Ukraine"].hotels.push({ "id": "1074120565317571", "name" : "NEWhot","description": "some description"});
+countries["UK"].hotels.push({ "id": "67834714427590370", "name" : "NEWhot","description": "some description"});
+countries["Ukraine"].hotels[0].name = "NEWnewHot";
+countries["Ukraine"].hotels[0].description = "NewDesc";
+countries["Ukraine"].hotels[1].name = "NEWnewHot";
+countries["Ukraine"].hotels[1].description = "asdasd";
+countries["Ukraine"].hotels[1].description = "asdasdNEWNEWNEW";
+countries["Ukraine"].hotels.splice(1, 1);
+countries["Ukraine"].hotels.splice(1, 1);

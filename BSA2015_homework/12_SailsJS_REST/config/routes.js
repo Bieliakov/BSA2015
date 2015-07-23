@@ -47,17 +47,20 @@ module.exports.routes = {
 
   'get /restapi/country/:name' : 'CountryController.getCountryBySlug',
 
-  'post /restapi/:name' : 'CountryController.appendCountry',
+  // add country in format ?name=parameter&description=parameter2
+  'post /restapi/country' : 'CountryController.appendCountry',
 
-  'post /restapi/country/:name/:hotelName' : 'CountryController.addHotelToCountry',
+  'get /restapi/hotel/:id': 'CountryController.find',
 
-  'get /restapi/hotel/:id': 'CountryController.getHotelById',
+  // add hotel in format ?name=parameter&description=parameter2
+  'post /restapi/country/:countryName' : 'CountryController.create',
 
-  'delete /restapi/hotel/:id': 'CountryController.removeHotel',
+  'delete /restapi/hotel/:id': 'CountryController.destroy',
 
-  'put /restapi/hotel/:id/:name' : 'CountryController.updateHotel',
+  // update hotel in format ?name=parameter&description=parameter2
+  'put /restapi/hotel/:id' : 'CountryController.update',
 
-  'patch /restapi/hotel/:id/:name' : 'CountryController.updateHotel'
+  'patch /restapi/hotel/:id' : 'CountryController.update'
 
   /***************************************************************************
   *                                                                          *
