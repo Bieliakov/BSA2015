@@ -1,0 +1,96 @@
+* [33m22daa3f[m[33m ([1;31morigin/develop-feature1[m[33m, [1;32mdevelop-feature1[m[33m)[m 6: CHANGED MESSAGE2v3 (second update unstable_commits_in_develop_feature1.txt file)
+* [33m47866db[m 6: CHANGED MESSAGE1v3 (update unstable_commits_in_develop_feature1.txt file)
+* [33mbabe94f[m 6: Continue to work on develop-feature1 (create unstable_commits_in_develop_feature1.txt file)
+* [33m590a0b2[m 5: Hotfix to develop-feature1 (create critical_fix_in_develop_feature1.txt file)
+[31m|[m * [33m454fb7e[m[33m ([1;36mHEAD[m[33m, [1;31morigin/develop[m[33m, [1;32mdevelop[m[33m)[m 5: Hotfix to develop-feature1 (create critical_fix_in_develop_feature1.txt file)
+[31m|[m[31m/[m  
+* [33m99b3e22[m 3: Develop-feature1 (create js.js file)
+* [33mec778a5[m[33m ([1;32mmaster[m[33m)[m 3: Develop-feature1 (update index.html file)
+[32m|[m * [33m9867008[m[33m ([1;31morigin/master[m[33m)[m complete 12_sails task
+[32m|[m [33m|[m * [33me92b1e8[m[33m ([1;32mdevelop-feature2[m[33m)[m 4: Develop-feature2 (create js-develop2.js file)
+[32m|[m [33m|[m * [33m500d3f6[m 4: Develop-feature2 (add conflict to index.html file)
+[32m|[m [33m|[m[32m/[m  
+[32m|[m[32m/[m[33m|[m   
+* [33m|[m [33me832d1f[m 2: Develop (update index.html file)
+* [33m|[m [33m3b03501[m 2: Develop (create index.html file)
+[33m|[m[33m/[m  
+* [33m7a09839[m 1: Preview (second commit is done)
+* [33m9d2a549[m 1: Preview (first commit is done)
+* [33m25b7c77[m 1: Preview (first commit is done)
+* [33m41062fe[m remove node_packadges
+* [33m14e2116[m done 13 hw
+* [33mde84625[m some changes v2
+* [33md0643ca[m some changes
+* [33m121eb9d[m finally done :)
+* [33m06aa24e[m finally done :)
+* [33m5007051[m update readme files v2
+* [33m96594e2[m update readme files
+* [33mc73b240[m done 10hw v2
+* [33me627ff8[m done 10hw+
+* [33mdf62582[m done 10hw
+* [33mcbae45a[m slight loop change in service_$resource
+* [33mcd6d0a3[m done hw9 v 4
+* [33m07ee55d[m done hw9 v 3
+* [33m1e653d2[m done hw9 v 2
+* [33m69ef44b[m done hw9
+* [33m5cb5c52[m done hw7
+* [33m1a61caa[m add ng-cloak
+* [33m0a85f70[m update hw8 v2
+* [33me1fcd82[m update hw8
+* [33md41211e[m update controller.js
+* [33md453a22[m update controller.js
+* [33mdd08c4f[m update controller.js
+* [33m9baf00d[m update hw6_mvc
+* [33m7ccad6a[m update MVC task#6
+* [33m697adf1[m complete task 5 and 6
+* [33mf3477e0[m complete task 6
+* [33m30e7ebe[m before checkChanges function becomes Controller's' one
+* [33mafe13f4[m update readme.md files
+* [33m99891e8[m update readme.md files
+* [33m64d7a17[m update readme.md files
+* [33me857ba9[m update readme.md files
+* [33m795634c[m update readme.md files
+* [33m94d1d65[m update readme.md files
+* [33m20072a0[m update readme.md files
+* [33m121d622[m add readme.md
+* [33m6fcc020[m partly add readme.md
+* [33mf4e600c[m add 5 and 6 tasks
+* [33m7ed3851[m Update readme.md
+* [33m21222c9[m Fix bug with #delete_button appearance in FF/ie9
+* [33m4a24714[m Tiny change in title
+* [33m0ac2b93[m Remove unnecessary console.log statemants
+* [33m4684093[m Add some improvements for products editing
+* [33m1106bb4[m Add function to place cursor at end of text in text input element
+* [33mf647daf[m Modify input.row to place cursor at end of text in text input element
+* [33m7254a49[m Remove extra spaces, add slight changes
+* [33m9b0ce35[m Add tiny changes + better ie8 compatibility
+* [33m0085299[m Midify delete_button styles in IE8+
+* [33m0199d55[m Remove some blank lines
+* [33m0f3e2e4[m Add almost full ie8+ compatibility
+* [33mca0cee9[m Add ie8+ compatibility
+* [33mcf4be46[m Modify opacity=0.5 of img#left_image_all
+* [33m20b4179[m Modify long lines v3.0
+* [33mf565360[m Modify long lines v2.0
+* [33m32fa597[m Modify long lines
+* [33mae89419[m Remove some blank lines
+* [33m7ae93ac[m Add Application.checkDeleteButton function
+* [33m4e11df9[m Tiny change
+* [33ma663bca[m Release v 1.0 before the soft deadline ;)
+* [33meb77f1b[m A lot of code editing and testing
+* [33me42680d[m added some styles
+* [33mb271283[m before structure changes
+* [33m2ad7fd6[m Create all staff :)
+* [33mb90e6e7[m js intro modified
+* [33m6bba534[m Update RESTHTTP done2.docx
+*   [33md8fc18a[m Merge remote-tracking branch 'origin/master'
+[35m|[m[36m\[m  
+[35m|[m * [33m2a01e64[m Update mongoDB.txt
+[35m|[m * [33m0635a81[m Delete RESTHTTP_done.docx
+* [36m|[m [33m96408e6[m Update MongoDB.txt
+[36m|[m[36m/[m  
+* [33m882df5e[m Change the REST task
+* [33mc0adbbf[m MongoDB statements
+* [33mef17be6[m Delete js_intro_solution.html
+* [33m85dbd2e[m Delete RESTHTTP_done.docx
+* [33mce632db[m Create exclusive folder for entrance tasks
+* [33mc7d38f3[m First commit :)
