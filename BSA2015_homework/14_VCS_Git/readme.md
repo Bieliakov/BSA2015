@@ -16,6 +16,7 @@ git log master develop --grep=231 --pretty=format:"%s %an %ad" --date-order
 
 ОТВЕТ: необходимо, находясь на ветке develop (git checkout develop) выполнить комманду git cherry-pick {%commit_hash%}
 , где {%commit_hash%} - хэш коммита с хотфиксом, который хотим добавить в ветку develop.
+Далее запушить изменения на сервер.
 
 3. “Исправление ошибок”.
 Дано: Вы начали работу над новой фичей и создали от develop дочернюю ветку develop-feature3.
