@@ -7,7 +7,7 @@ I'm a student at BSA 2015 (<a href='http://binary-studio.com/academy/about/js/'>
     HTTP, Архитектура API (REST, RPC)     May 9, 2015	    Jun 2, 2015       	Jun 5, 2015         10/10
     MongoDB	                              May 10, 2015 	  Jun 2, 2015 	      Jun 5, 2015         9/10
     JS DOM API, jQuery	                  May 11, 2015 	  Jun 16, 2015        Jun 19, 2015        9/10
-    CSS, HTML	                            Jul 2, 2015     Jul 6, 2015         Jul 9, 2015         9/10
+    CSS, HTML                             Jul 2, 2015     Jul 6, 2015         Jul 9, 2015         9/10
     Архитектура UI приложений	            Jul 4, 2015	    Jul 6, 2015         Jul 9, 2015         8/10
     Modern HTML layouts                   Jul 6, 2015 	  Jul 13, 2015 	      Jul 16, 2015        10/10
     Angular.js Introduction	              Jul 8, 2015 	  Jul 12, 2015       	Jul 15, 2015        10/10
