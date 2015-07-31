@@ -3,8 +3,8 @@
 I'm a student at BSA 2015 (<a href='http://binary-studio.com/academy/about/js/'>JavaScript direction</a>) and this is my working repository. 
 
                 TASK TITLE	             TIME	           SOFT DEADLINE	    HARD DEADLINE	      STATUS
-    Javascript introduction	              May 8, 2015 	  Jun 2, 2015	        Jun 5, 2015         9/10
-    HTTP, Архитектура API (REST, RPC)	    May 9, 2015	    Jun 2, 2015       	Jun 5, 2015         10/10
+    Javascript introduction               May 8, 2015 	  Jun 2, 2015	        Jun 5, 2015         9/10
+    HTTP, Архитектура API (REST, RPC)     May 9, 2015	    Jun 2, 2015       	Jun 5, 2015         10/10
     MongoDB	                              May 10, 2015 	  Jun 2, 2015 	      Jun 5, 2015         9/10
     JS DOM API, jQuery	                  May 11, 2015 	  Jun 16, 2015        Jun 19, 2015        9/10
     CSS, HTML	                            Jul 2, 2015     Jul 6, 2015         Jul 9, 2015         9/10
