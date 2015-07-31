@@ -2,9 +2,9 @@
 
 I'm a student at BSA 2015 (<a href='http://binary-studio.com/academy/about/js/'>JavaScript direction</a>) and this is my working repository. 
 
-                    UNITS	                                          TIME	SOFT DEADLINE	HARD DEADLINE	TYPE
-JS Lecture 1. Javascript introduction	            May 8, 2015 17:53	Jun 2, 2015 12:21:47 PM	Jun 5, 2015 12:21:47 PM	offline
-JS Lecture 2. HTTP, Архитектура API (REST, RPC)	  May 9, 2015 17:52	Jun 2, 2015 12:21:28 PM	Jun 5, 2015 12:21:28 PM	offline
+                    UNITS	                          TIME	SOFT DEADLINE	HARD DEADLINE	TYPE
+    Javascript introduction	            May 8, 2015 17:53	Jun 2, 2015 12:21:47 PM	Jun 5, 2015 12:21:47 PM	offline
+    HTTP, Архитектура API (REST, RPC)	  May 9, 2015 17:52	Jun 2, 2015 12:21:28 PM	Jun 5, 2015 12:21:28 PM	offline
 JS Lecture 3. MongoDB	                            May 10, 2015 17:51	Jun 2, 2015 12:21:54 PM	Jun 5, 2015 12:21:54 PM	offline
 JS Lecture 4. JS DOM API, jQuery	                May 11, 2015 17:51	Jun 16, 2015 12:00:00 AM	Jun 19, 2015 12:00:00 AM	offline
 Binary Studio Academy 2015: Introduction	        Jun 30, 2015 17:46	Jul 3, 2015 1:07:59 PM	Jul 6, 2015 1:07:59 PM	offline
